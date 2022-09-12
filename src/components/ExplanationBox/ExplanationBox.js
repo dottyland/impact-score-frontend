@@ -6,9 +6,15 @@ const ExplanationBox = () => {
 	return (
 		<div className={style.ExplanationBox}>
 			<div className={style.ExplanationBoxContainer}>
-				<Explanation />
-				<Explanation />
-				<Explanation />
+				<h1 className={style.ExplanationBoxText}>
+					Claim impact self
+				</h1>
+
+				<div className={style.ExplanationWrapper}>
+					<Explanation />
+					<Explanation />
+					<Explanation />
+				</div>
 			</div>
 		</div>
 	)

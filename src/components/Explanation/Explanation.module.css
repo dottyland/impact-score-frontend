@@ -3,3 +3,25 @@
 	flex-direction: column;
 	color: #FFF;
 }
+
+.ExplanationText{
+	color: #F2F2F2;
+	font-size: 1.2em;
+}
+
+.ExplanationDetails{
+	color: #B2B2B1;
+	font-size: 0.8em;
+}
+
+.NumberWrapper {
+	background-color: green;
+	width: 60px;
+	border-radius: 10px;
+	display: flex;
+	color: #1D1E1B;
+}
+
+.NumberText{
+	margin: auto;
+}

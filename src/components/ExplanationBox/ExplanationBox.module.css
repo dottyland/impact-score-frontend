@@ -5,3 +5,13 @@
 	border-radius: 10px;
 	width: 50%;
 }
+
+.ExplanationBoxText{
+	color: #FFF;
+}
+
+.ExplanationWrapper{
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
