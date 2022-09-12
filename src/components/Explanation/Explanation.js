@@ -4,7 +4,7 @@ import style from './Explanation.module.css';
 const Explanation = () => {
 	return (
 		<div>
-			<div>
+			<div className={style.Explanation}>
 				<div>
 					<span>Step 1</span>
 				</div>

@@ -3,7 +3,7 @@ import style from './CTAButton.module.css';
 
 const CTAButtton = () => {
 	return (
-		<button>
+		<button className={style.CTAButton}>
 			Button Text
 		</button>
 	)

@@ -1,0 +1,5 @@
+.Explanation{
+	display: flex;
+	flex-direction: column;
+	color: #FFF;
+}

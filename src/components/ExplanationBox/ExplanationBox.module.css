@@ -1,0 +1,7 @@
+.ExplanationBox{
+	display: flex;
+	flex-direction: column;
+	background-color: #1D1E1B;
+	border-radius: 10px;
+	width: 50%;
+}

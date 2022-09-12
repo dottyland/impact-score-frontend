@@ -7,12 +7,10 @@ import CTAButton from '../../components/CTAButton/CTAButton'
 const Home = () => {
 	return (
 		<div className={style.Home}>
-			<span>
-				Claim impact self
+			<span className={style.PageTitle}>
+				For 7.7bln consumers to halt climate crisis, impact must become part of identity
 			</span>
-
-			<span>For 7.7bln consumers to halt climate crisis, impact must become part of identity</span>
-			<ExplanationBox/>
+			<ExplanationBox />
 			<CTAButton />
 		</div>
 	)

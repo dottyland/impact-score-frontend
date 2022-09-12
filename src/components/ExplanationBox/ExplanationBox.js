@@ -1,11 +1,15 @@
 import React from 'react'
-import style from './Explanation.module.css'
+import style from './ExplanationBox.module.css'
 import Explanation from '../Explanation/Explanation';
 
 const ExplanationBox = () => {
 	return (
-		<div class>
-			<Explanation/>
+		<div className={style.ExplanationBox}>
+			<div className={style.ExplanationBoxContainer}>
+				<Explanation />
+				<Explanation />
+				<Explanation />
+			</div>
 		</div>
 	)
 }
