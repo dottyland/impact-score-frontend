@@ -1,6 +1,6 @@
 import React from 'react'
 import style from './ExplanationBox.module.css'
-import Explanation from '../Explanation/Explanation';
+import Explanation from '../../components/Explanation/Explanation';
 
 const ExplanationBox = () => {
 	return (

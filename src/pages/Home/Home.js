@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './Home.module.css';
-import ExplanationBox from '../../components/ExplanationBox/ExplanationBox'
+import ExplanationBox from '../../containers/ExplanationBox/ExplanationBox'
 import CTAButton from '../../components/CTAButton/CTAButton'
 
 
