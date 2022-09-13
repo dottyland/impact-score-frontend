@@ -1,0 +1,37 @@
+.Explanation {
+	display: flex;
+	flex-direction: column;
+	color: #FFF;
+	gap: 20px;
+}
+
+.ExplanationText {
+	color: #F2F2F2;
+	font-size: 1.2em;
+	margin-bottom: 5px;
+}
+
+.ExplanationDetails {
+	color: #B2B2B1;
+	font-size: 0.8em;
+}
+
+.NumberWrapper {
+	background-color: green;
+	width: 60px;
+	border-radius: 50px;
+	display: flex;
+	color: #1D1E1B;
+	padding: 2px;
+}
+
+.NumberText {
+	margin: auto;
+}
+
+.ExplanationTextWrapper {
+	display: flex;
+	flex-direction: column;
+	border-left: 2px #EBF8A1 dotted;
+	padding-left: 20px;
+}
