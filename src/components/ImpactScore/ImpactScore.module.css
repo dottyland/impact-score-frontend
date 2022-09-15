@@ -31,7 +31,7 @@
     	content: "";
     	width: inherit;
     	height: inherit;
-    	border: 45px solid rgba(211, 211, 211, 0.3);
+    	border: 45px solid #D9D9D9;
     	border-bottom: none;
     	border-top-left-radius: 175px;
     	border-top-right-radius: 175px;
@@ -54,7 +54,10 @@
     	animation-duration: 0.4s;
     	animation-timing-function: linear;
     	z-index: 4;
-    	border-color: green;
+		/* border-radius: 10px; */
+    	/* border-color: green; */
+    	/* background: rgb(250, 213, 188); */
+    	/* background: linear-gradient(90deg, rgba(250, 213, 188, 1) 0%, rgba(206, 198, 245, 1) 100%); */
     	animation-name: rotate-one;
     }
 
