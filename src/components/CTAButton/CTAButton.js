@@ -3,7 +3,11 @@ import style from './CTAButton.module.css';
 
 const CTAButtton = props => {
 	return (
-		<button className={style.CTAButton}>
+		<button
+			className={style.CTAButton}
+			onClick={
+				props.click()
+			}>
 			{props.buttonText}
 		</button>
 	)
