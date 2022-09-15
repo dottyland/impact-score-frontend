@@ -7,12 +7,13 @@ import {
 	Route,
 	Link,
 	useLocation
-} from 'react-router-dom'
+} from 'react-router-dom';
+import './App.css'
 
 const App = () => {
 	return (
 		<Router>
-			<div>
+			<div className='App'>
 				<Routes>
 					<Route
 						exact path='/' element={<Home />}
