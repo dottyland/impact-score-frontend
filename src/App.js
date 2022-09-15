@@ -25,6 +25,10 @@ const App = () => {
 					<Route
 						exact path='/dashboard' element={<Dashboard />}
 					/>
+
+					<Route
+						// exact path='/NFT' element={<NFT />}
+					/>
 				</Routes>
 			</div>
 		</Router>

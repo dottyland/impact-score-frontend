@@ -1,10 +1,10 @@
 import React from 'react';
 import style from './CTAButton.module.css';
 
-const CTAButtton = () => {
+const CTAButtton = props => {
 	return (
 		<button className={style.CTAButton}>
-			Button Text
+			{props.buttonText}
 		</button>
 	)
 }

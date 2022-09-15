@@ -11,7 +11,7 @@ const Home = () => {
 				For 7.7bln consumers to halt climate crisis, impact must become part of identity
 			</span>
 			<ExplanationBox />
-			<CTAButton />
+			<CTAButton buttonText = 'connect wallet'/>
 		</div>
 	)
 }
