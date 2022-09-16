@@ -4,9 +4,12 @@ import style from './AuthBanner.module.css';
 const AuthBanner = props => {
 	return (
 		<div className={style.AuthBanner}>
-			<span>Icon</span>
+			<div className={style.BannerImage}>
+				<img src={props.icon} alt="" />
+			</div>
+
 			<span className={style.BannerText}>
-				Text
+				{props.text}
 			</span>
 		</div>
 	)
