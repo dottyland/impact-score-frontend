@@ -3,13 +3,12 @@
 	flex-direction: column;
 	align-items: center;
 	gap: 30px;
-	width: 100%;
+	width: 80%;
 	height: 100%;
-	background: rgb(255, 255, 255);
-	background: radial-gradient(circle, rgba(255, 255, 255, 1) 56%, rgba(233, 233, 168, 0.2559106376733673) 70%, rgba(244, 215, 192, 0.3598432219430302) 83%, rgba(215, 207, 229, 0.4384949073362886) 92%, rgba(214, 235, 243, 1) 100%);
+	margin: auto;
 }
 
 .PageTitle {
 	font-weight: 700;
-	font-size: 1.2em;
+	font-size: 1.5em;
 }

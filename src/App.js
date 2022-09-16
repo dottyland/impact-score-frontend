@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './pages/Home/Home';
 import Dashboard from './pages/Dashboard/Dashboard';
+import AuthPage from './pages/Auth/AuthPage';
 import {
 	BrowserRouter as Router,
 	Routes,
@@ -24,11 +25,15 @@ const App = () => {
 					/>
 
 					<Route
+						exact path='/auth' element={<AuthPage />}
+					/>
+
+					<Route
 						exact path='/dashboard' element={<Dashboard />}
 					/>
 
 					<Route
-						// exact path='/NFT' element={<NFT />}
+					// exact path='/NFT' element={<NFT />}
 					/>
 				</Routes>
 			</div>
