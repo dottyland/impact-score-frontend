@@ -31,8 +31,9 @@
     	content: "";
     	width: inherit;
     	height: inherit;
-    	border: 45px solid #D9D9D9;
+    	border: 32px solid #D9D9D9;
     	border-bottom: none;
+		/* border-radius: 5px; */
     	border-top-left-radius: 175px;
     	border-top-right-radius: 175px;
     }
@@ -43,7 +44,7 @@
     	left: 0;
     	width: inherit;
     	height: inherit;
-    	border: 45px solid;
+    	border: 32px solid;
     	border-top: none;
     	border-bottom-left-radius: 175px;
     	border-bottom-right-radius: 175px;
@@ -66,13 +67,13 @@
     	left: 50%;
     	bottom: 0;
     	transform: translateX(-50%);
-    	font-size: 1.1rem;
-    	font-weight: bold;
-    	color: cadetblue;
+    	font-size: 3em;
+    	font-weight: 500;
+    	color: #000;
     }
 
     span.result span:nth-child(1) {
-    	font-size: 2rem;
+    	font-size: 4rem;
     }
 
     @keyframes rotate-one {

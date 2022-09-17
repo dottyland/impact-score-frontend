@@ -8,7 +8,7 @@ const ImpactScore = ({ value, maxValue }) => {
     <div className={style.indicator}>
       <span className={style.bar} style={{ transform: `rotate(${deg}deg)` }} />
       <span className={style.result}>
-        <span>{value}</span>/<span>{maxValue}</span>
+        <span>{value}</span>
       </span>
     </div>
   );

@@ -8,6 +8,7 @@ const CTAButtton = props => {
 			onClick={
 				props.click()
 			}>
+			<span>icon</span>
 			{props.buttonText.toUpperCase()}
 		</button>
 	)
