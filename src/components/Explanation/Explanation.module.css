@@ -18,7 +18,8 @@
 }
 
 .NumberWrapper {
-	background-color: green;
+	background: rgb(184, 241, 198);
+	background: linear-gradient(65deg, rgba(184, 241, 198, 1) 0%, rgba(235, 248, 161, 1) 100%);
 	width: 60px;
 	border-radius: 50px;
 	display: flex;

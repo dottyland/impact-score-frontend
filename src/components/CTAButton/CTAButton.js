@@ -8,7 +8,7 @@ const CTAButtton = props => {
 			onClick={
 				props.click()
 			}>
-			{props.buttonText}
+			{props.buttonText.toUpperCase()}
 		</button>
 	)
 }
