@@ -13,12 +13,12 @@ import {
 import './App.css'
 
 const App = () => {
-	const [value, setValue] = useState('wallet address')
+	const [walletAddress, setWalletAddress] = useState('test')
 
 	return (
 		<Router>
 			<div className='App'>
-				<UserContext.Provider value={{value, setValue}}>
+				<UserContext.Provider value={{ walletAddress, setWalletAddress }}>
 					<Routes>
 						<Route
 							exact path='/' element={<Home />}
