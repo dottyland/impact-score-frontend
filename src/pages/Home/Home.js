@@ -21,13 +21,14 @@ const Home = () => {
 		console.log(isunlocked)
 	}
 
-	useEffect(async () => {
-		checkUserConnected()
-		const accounts = await ethereum.request({
-			method: 'eth_requestAccounts',
-		});
-		setWalletAddress(accounts[0])
-	}, [])
+	// useEffect(async () => {
+	// 	checkUserConnected()
+	// 	const accounts = await ethereum.request({
+	// 		method: 'eth_requestAccounts',
+	// 	});
+	// 	// setWalletAddress(accounts[0])
+	// 	return accounts[0]
+	// }, [])
 
 	const goToAuth = () => {
 		navigate('/auth')
@@ -63,7 +64,7 @@ const Home = () => {
 			<CTAButton
 				buttonIcon={ethereumIcon}
 				buttonText='connect wallet'
-				click={() => connectWalletHandler}
+				click={() => connectWalletHandler()}
 			// click={() => setValue(address)}
 			/>
 				<button onClick={goToAuth}>test</button>

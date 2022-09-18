@@ -7,15 +7,17 @@ import ImpactScore from '../../components/ImpactScore/ImpactScore';
 const Dashboard = () => {
 	return (
 		<div className={style.Dashboard}>
-			<span>Your impact score is: Excellent</span>
-			<ImpactScore value={86} maxValue={100}/>
-
-			<div className={style.DashboardButtons}>
-				<CTAButton buttonText = 'stuff' click = {() => 'hi'}/>
-				<CTAButton buttonText = 'stuff' click = {() => 'hi'}/>
+			<div className={style.ImpactScoreContainer}>
+				<span>Your impact score is: Excellent</span>
+				<ImpactScore value={86} maxValue={100} />
 			</div>
 
-			<ExplanationBox/>
+			<div className={style.DashboardButtons}>
+				<CTAButton buttonText='stuff' click={() => 'hi'} />
+				<CTAButton buttonText='stuff' click={() => 'hi'} />
+			</div>
+
+			<ExplanationBox />
 		</div>
 	)
 }

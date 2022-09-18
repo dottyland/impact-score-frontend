@@ -11,6 +11,7 @@ import { UserContext } from '../../contexts/UserContext';
 const AuthPage = () => {
 
 	const [messageSigned, setmessageSigned] = useState(false)
+	const [calculateScore, setCalculateScore] = useState(false)
 	const { walletAddress } = useContext(UserContext);
 
 	const AuthConnectedMessage = () => {
@@ -19,7 +20,9 @@ const AuthPage = () => {
 				`Your address: ${walletAddress} is connected. We just need you to sign a message to confirm it’s yours.`
 			} />
 			<CTAButton buttonText='Sign message'
-				click={() => 'stuff'}
+				click={() => {
+					setmessageSigned(!messageSigned)
+				}}
 			/>
 			<Link to='/dashboard'>
 				<button>test</button>
@@ -28,25 +31,25 @@ const AuthPage = () => {
 		)
 	}
 
-	const AuthSignMessage = () => {
-		return (<div className={style.AuthPage}>
-			<AuthBanner icon={scanImage} text={
-				`Your address: ${walletAddress} is connected. We just need you to sign a message to confirm it’s yours.`
-			} />
-			<CTAButton buttonText='calculate score'
-				click={() => 'stuff'}
-			/>
-			<Link to='/dashboard'>
-				<button>test</button>
-			</Link>
-		</div>
-		)
-	}
+	// const AuthSignMessage = () => {
+	// 	return (<div className={style.AuthPage}>
+	// 		<AuthBanner icon={scanImage} text={
+	// 			`Scanning the blockchain for your evironmental impact`
+	// 		} />
+	// 		<CTAButton buttonText='calculate score'
+	// 			click={() => 'stuff'}
+	// 		/>
+	// 		<Link to='/dashboard'>
+	// 			<button>test</button>
+	// 		</Link>
+	// 	</div>
+	// 	)
+	// }
 
 	const AuthCalculateScore = () => {
 		return (<div className={style.AuthPage}>
 			<AuthBanner icon={calculateImage} text={
-				`Your address: ${walletAddress} is connected. We just need you to sign a message to confirm it’s yours.`
+				`Calculating a score based on what we found...`
 			} />
 			<CTAButton buttonText='dashboard'
 				click={() => 'stuff'}
@@ -60,9 +63,11 @@ const AuthPage = () => {
 
 	return (
 		<div className={style.AuthPage}>
-			<AuthConnectedMessage/>
-			<AuthSignMessage/>
-			<AuthCalculateScore/>		
+			{messageSigned ?
+				<AuthCalculateScore />
+				:
+				<AuthConnectedMessage />
+			}
 		</div>
 	)
 }

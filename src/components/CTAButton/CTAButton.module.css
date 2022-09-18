@@ -1,10 +1,21 @@
 .CTAButton{
-	width: 280px;
-	height: 50px;
+	width: 300px;
+	height: 64px;
 	border-radius: 80px;
 	background: rgb(250,213,188);
 	background: linear-gradient(90deg, rgba(250,213,188,1) 0%, rgba(155,135,255,1) 100%);
 	border: none;
 	font-weight: 700;
-	font-size: 1em;
+	font-size: 0.8em;
+}
+
+.ButtonIcon{
+	height: 20px;
+}
+
+.ButtonContent{
+	display: flex;
+	gap: 30px;
+	justify-content: center;
+	align-items: center;
 }

@@ -4,7 +4,7 @@
 	align-items: center;
 	background-color: #1D1E1B;
 	color: #FFF;
-	width: 40%;
+	width: 480px;
 	gap: 20px;
 	border-radius: 10px;
 	padding: 40px;
@@ -13,4 +13,5 @@
 .BannerText {
 	font-weight: 500;
 	font-size: 1.2em;
+	text-align: center;
 }
