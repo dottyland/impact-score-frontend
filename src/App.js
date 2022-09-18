@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Home from './pages/Home/Home';
 import Dashboard from './pages/Dashboard/Dashboard';
 import AuthPage from './pages/Auth/AuthPage';
+import NavBar from './containers/NavBar/NavBar';
 import { UserContext } from './contexts/UserContext';
 import {
 	BrowserRouter as Router,
@@ -13,8 +14,8 @@ import {
 import './App.css'
 
 const App = () => {
-	const [walletAddress, setWalletAddress] = useState('test')
-	const [isLoggedIn, setLoggedIn] = useState('not logged in')
+	const [walletAddress, setWalletAddress] = useState(null)
+	const [isLoggedIn, setLoggedIn] = useState(false)
 
 	// if (walletAddress) {
 	// 	setLoggedIn(!isLoggedIn)
@@ -29,7 +30,9 @@ const App = () => {
 					isLoggedIn,
 					setLoggedIn
 				}}>
-					nav {isLoggedIn}
+
+				<NavBar/>
+
 					<Routes>
 						<Route
 							exact path='/' element={<Home />}

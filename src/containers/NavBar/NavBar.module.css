@@ -1,0 +1,11 @@
+.NavBar{
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.NavContent {
+	display: flex;
+	flex-direction: row;
+	margin: auto;
+}

@@ -10,7 +10,7 @@ const AuthBanner = props => {
 
 			<span className={style.BannerText}>
 				{props.text}
-			</span>
+		</span>
 		</div>
 	)
 }
