@@ -14,11 +14,22 @@ import './App.css'
 
 const App = () => {
 	const [walletAddress, setWalletAddress] = useState('test')
+	const [isLoggedIn, setLoggedIn] = useState('not logged in')
+
+	// if (walletAddress) {
+	// 	setLoggedIn(!isLoggedIn)
+	// }
 
 	return (
 		<Router>
 			<div className='App'>
-				<UserContext.Provider value={{ walletAddress, setWalletAddress }}>
+				<UserContext.Provider value={{
+					walletAddress,
+					setWalletAddress,
+					isLoggedIn,
+					setLoggedIn
+				}}>
+					nav {isLoggedIn}
 					<Routes>
 						<Route
 							exact path='/' element={<Home />}

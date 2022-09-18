@@ -13,16 +13,20 @@ const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
 
 const Home = () => {
-	const { walletAddress, setWalletAddress } = useContext(UserContext)
-	const [address, setAddress] = useState('')
+	const { walletAddress,
+		 setWalletAddress,
+		 isLoggedIn,
+		 setLoggedIn
+		 } = useContext(UserContext)
+	// const [address, setAddress] = useState('')
 
 	const connectWalletHandler = async () => {
 		console.log('test')
 		const accounts = await ethereum.request({
 			method: 'eth_requestAccounts',
 		});
-		setAddress(accounts[0])
-		setWalletAddress(address)
+		setWalletAddress(accounts[0])
+		setLoggedIn('logged in')
 	}
 
 	return (
@@ -32,6 +36,7 @@ const Home = () => {
 			</span>
 			<span>
 				{walletAddress}
+				{isLoggedIn}
 			</span>
 			<ExplanationBox />
 			<CTAButton
