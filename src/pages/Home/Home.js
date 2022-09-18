@@ -6,12 +6,13 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { ethers } from 'ethers';
 import { UserContext } from '../../contexts/UserContext';
-import ethereumIcon from '../../../assets/ethereum.png'
+import ethereumIcon from '../../assets/ethereum.png'
 
 const domain = window.location.host;
 const origin = window.location.origin;
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
+const { ethereum } = window
 
 const Home = () => {
 	let navigate = useNavigate();
@@ -67,7 +68,7 @@ const Home = () => {
 				click={() => connectWalletHandler()}
 			// click={() => setValue(address)}
 			/>
-				<button onClick={goToAuth}>test</button>
+			<button onClick={goToAuth}>test</button>
 		</div>
 	)
 }

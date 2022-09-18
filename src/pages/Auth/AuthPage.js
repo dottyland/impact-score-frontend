@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import style from './AuthPage.module.css';
 import AuthBanner from '../../components/Banners/AuthBanner';
 import CTAButton from '../../components/CTAButton/CTAButton';
-import calculateImage from '../../../assets/calculate.svg';
-import scanImage from '../../../assets/scan.svg';
-import authenticateImage from '../../../assets/authentication.svg';
+import calculateImage from '../../assets/calculate.svg';
+import scanImage from '../../assets/scan.svg';
+import authenticateImage from '../../assets/authentication.svg';
 import { UserContext } from '../../contexts/UserContext';
 
 const AuthPage = () => {
