@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import style from './NavBar.module.css';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const NavBar = () => {
 	const {
@@ -18,7 +19,9 @@ const NavBar = () => {
 					</button> : <button>
 						connect wallet
 					</button>
+
 				}
+				<ConnectButton/>
 			</div>
 		</div>
 	)
