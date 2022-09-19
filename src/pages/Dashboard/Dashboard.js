@@ -4,6 +4,7 @@ import CTAButton from '../../components/CTAButton/CTAButton';
 import ExplanationBox from '../../containers/ExplanationBox/ExplanationBox';
 import ImpactScore from '../../components/ImpactScore/ImpactScore';
 import { UserContext } from '../../contexts/UserContext';
+import Spinner from '../../components/Spinner/Spinner';
 
 const Dashboard = () => {
 	const {impactScore} = useContext(UserContext)
@@ -17,11 +18,12 @@ const Dashboard = () => {
 			</div>
 
 			<div className={style.DashboardButtons}>
-				<CTAButton buttonText='stuff' click={() => 'hi'} />
-				<CTAButton buttonText='stuff' click={() => 'hi'} />
+				<CTAButton buttonText='Share to lens' click={() => 'hi'} />
+				<CTAButton buttonText='Mint impact NFT' click={() => 'hi'} />
 			</div>
 
 			<ExplanationBox />
+			<Spinner/>
 		</div>
 	)
 }

@@ -9,7 +9,7 @@ const ImpactScore = ({ value, maxValue }) => {
 	} = useContext(UserContext);
   const [score,setScore]=useState(0);
   async function scoreCalculate(){
-    
+	
   }
   useEffect(()=>{
     async function calculate(){

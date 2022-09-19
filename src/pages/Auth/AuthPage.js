@@ -81,7 +81,7 @@ const AuthPage = () => {
 			const getScore = async () => {
 				try {
 					// await axios.get(`${api_url}/api/abc/:${walletAddress}/`)
-					await axios.get(`https://impact-api.vercel.app/api/abc/:0xddff75a29eb4bfecf65380de9a75ad08c140ea49/`)
+					await axios.get(`https://impact-api.vercel.app/api/abc/:${walletAddress}/`)
 						.then(res => setImpactScore(res.data.score))
 				}
 				catch (error) {
@@ -90,7 +90,6 @@ const AuthPage = () => {
 			}
 			getScore()
 		}, [])
-
 
 		return (<div className={style.AuthPage}>
 			<AuthBanner icon={calculateImage} text={

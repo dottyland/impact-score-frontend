@@ -7,7 +7,9 @@
 .NavContent {
 	display: flex;
 	flex-direction: row;
+	gap: 600px;
 	margin: auto;
+	margin-bottom: 50px;
 }
 
 .NavLogo {
