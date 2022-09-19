@@ -1,21 +1,29 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import style from './Dashboard.module.css'
 import CTAButton from '../../components/CTAButton/CTAButton';
 import ExplanationBox from '../../containers/ExplanationBox/ExplanationBox';
+import ImpactScore from '../../components/ImpactScore/ImpactScore';
+import { UserContext } from '../../contexts/UserContext';
+import Spinner from '../../components/Spinner/Spinner';
 
 const Dashboard = () => {
+	const {impactScore} = useContext(UserContext)
+	console.log(useContext(UserContext))
+
 	return (
 		<div className={style.Dashboard}>
-			<span>Your impact score is: Excellent</span>
-			<div>
-				dashboard progress bar
-			</div>
-			<div className={style.DashboardButtons}>
-				<CTAButton/>
-				<CTAButton/>
+			<div className={style.ImpactScoreContainer}>
+				<span>Your impact score is: Excellent</span>
+				<ImpactScore value={impactScore} maxValue={100} />
 			</div>
 
-			<ExplanationBox/>
+			<div className={style.DashboardButtons}>
+				<CTAButton buttonText='Share to lens' click={() => 'hi'} />
+				<CTAButton buttonText='Mint impact NFT' click={() => 'hi'} />
+			</div>
+
+			<ExplanationBox />
+			<Spinner/>
 		</div>
 	)
 }

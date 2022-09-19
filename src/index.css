@@ -1,0 +1,6 @@
+body {
+	font-family: 'Raleway', sans-serif;
+	margin: none;
+	background: rgb(255, 255, 255);
+	background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(233, 233, 168, 0.2559106376733673) 40%, rgba(244, 215, 192, 0.3598432219430302) 73%, rgba(215, 207, 229, 0.4384949073362886) 83%, rgba(214, 235, 243, 1) 100%);
+}

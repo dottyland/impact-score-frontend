@@ -11,7 +11,7 @@ const Explanation = () => {
 
 				<div className={style.ExplanationTextWrapper}>
 					<span className={style.ExplanationText}>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Est repellendus libero quaerat, voluptas
+						Lorem ipsum dolor sit amet consectetur adipisicing
 					</span>
 
 					<span className={style.ExplanationDetails}>
