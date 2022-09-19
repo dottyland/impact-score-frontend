@@ -9,3 +9,18 @@
 	flex-direction: row;
 	margin: auto;
 }
+
+.NavLogo{
+	width: 80px;
+}
+
+.NavConnectButton{
+	border-radius: 50px;
+	border: none;
+	height: 40px;
+	background-color: #FFB6B6;
+}
+
+.ButtonText{
+	padding: 20px;
+}

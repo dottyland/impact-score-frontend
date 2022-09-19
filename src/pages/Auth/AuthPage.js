@@ -1,4 +1,6 @@
 import React, { useContext, useState } from 'react';
+import { ethers } from 'ethers';
+import { SiweMessage } from 'siwe';
 import { Link } from 'react-router-dom';
 import style from './AuthPage.module.css';
 import AuthBanner from '../../components/Banners/AuthBanner';
@@ -7,6 +9,31 @@ import calculateImage from '../../assets/calculate.svg';
 import scanImage from '../../assets/scan.svg';
 import authenticateImage from '../../assets/authentication.svg';
 import { UserContext } from '../../contexts/UserContext';
+
+const domain = window.location.host;
+const origin = window.location.origin;
+const provider = new ethers.providers.Web3Provider(window.ethereum);
+const signer = provider.getSigner();
+
+const createSiweMessage = (address, statement) => {
+    const message = new SiweMessage({
+        domain,
+        address,
+        statement,
+        uri: origin,
+        version: '1',
+        chainId: '1'
+    });
+    return message.prepareMessage();
+}
+
+const signInWithEthereum = async() => {
+    const message = createSiweMessage(
+        await signer.getAddress(),
+        'Sign in with Ethereum to the app.'
+    );
+    console.log(await signer.signMessage(message));
+}
 
 const AuthPage = () => {
 
@@ -21,6 +48,7 @@ const AuthPage = () => {
 			} />
 			<CTAButton buttonText='Sign message'
 				click={() => {
+					signInWithEthereum()
 					setmessageSigned(!messageSigned)
 				}}
 			/>
