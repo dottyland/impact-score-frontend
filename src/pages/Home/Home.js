@@ -39,7 +39,7 @@ const Home = () => {
 	const { walletAddress,
 		setWalletAddress,
 		isLoggedIn,
-		setLoggedIn
+		setLoggedIn,
 	} = useContext(UserContext)
 	// const [address, setAddress] = useState('')
 

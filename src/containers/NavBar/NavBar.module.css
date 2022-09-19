@@ -1,4 +1,4 @@
-.NavBar{
+.NavBar {
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -10,17 +10,18 @@
 	margin: auto;
 }
 
-.NavLogo{
+.NavLogo {
 	width: 80px;
 }
 
-.NavConnectButton{
+.NavConnectButton {
 	border-radius: 50px;
 	border: none;
 	height: 40px;
-	background-color: #FFB6B6;
+	background: rgb(255, 182, 182);
+	background: linear-gradient(65deg, rgba(255, 182, 182, 1) 0%, rgba(250, 213, 188, 1) 100%);
 }
 
-.ButtonText{
+.ButtonText {
 	padding: 20px;
 }
