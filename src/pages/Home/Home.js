@@ -3,7 +3,7 @@ import style from './Home.module.css';
 import ExplanationBox from '../../containers/ExplanationBox/ExplanationBox'
 import CTAButton from '../../components/CTAButton/CTAButton';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { ethers } from 'ethers';
 import { UserContext } from '../../contexts/UserContext';
 import ethereumIcon from '../../assets/ethereum.png'
@@ -16,11 +16,6 @@ const { ethereum } = window
 
 const Home = () => {
 	let navigate = useNavigate();
-
-	const checkUserConnected = async () => {
-		const isunlocked = await window.ethereum._metamask.isUnlocked();
-		console.log(isunlocked)
-	}
 
 	// useEffect(async () => {
 	// 	checkUserConnected()
@@ -41,7 +36,8 @@ const Home = () => {
 		isLoggedIn,
 		setLoggedIn,
 	} = useContext(UserContext)
-	// const [address, setAddress] = useState('')
+	const { address, isConnected } = useAccount()
+
 
 	const connectWalletHandler = async () => {
 		console.log('test')
@@ -49,13 +45,12 @@ const Home = () => {
 			method: 'eth_requestAccounts',
 		});
 		setWalletAddress(accounts[0])
-		setLoggedIn(true)
 	}
 
 	useEffect(() => {
-		isLoggedIn && goToAuth()
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isLoggedIn])
+		isConnected && goToAuth()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isConnected])
 
 	return (
 		<div className={style.Home}>
@@ -73,6 +68,8 @@ const Home = () => {
 				click={() => connectWalletHandler()}
 			// click={() => setValue(address)}
 			/>
+
+			{/* <ConnectButton /> */}
 			<button onClick={goToAuth}>test</button>
 		</div>
 	)

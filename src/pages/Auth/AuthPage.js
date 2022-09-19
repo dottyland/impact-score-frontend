@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import axios from 'axios';
 import { SiweMessage } from 'siwe';
-import { Link } from 'react-router-dom';
 import style from './AuthPage.module.css';
 import AuthBanner from '../../components/Banners/AuthBanner';
 import CTAButton from '../../components/CTAButton/CTAButton';
@@ -10,6 +9,8 @@ import calculateImage from '../../assets/calculate.svg';
 import scanImage from '../../assets/scan.svg';
 import authenticateImage from '../../assets/authentication.svg';
 import { UserContext } from '../../contexts/UserContext';
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import { Link, useNavigate } from 'react-router-dom';
 
 const domain = window.location.host;
 const origin = window.location.origin;
@@ -38,81 +39,35 @@ const signInWithEthereum = async () => {
 }
 
 const AuthPage = () => {
-
-	const [messageSigned, setmessageSigned] = useState(false)
-	const [calculateScore, setCalculateScore] = useState(false)
+	let navigate = useNavigate();
+	const [messageSigned, setmessageSigned] = useState(false);
+	const [calculateScore, setCalculateScore] = useState(false);
 	const { walletAddress, impactScore, setImpactScore } = useContext(UserContext);
+	const { address, isConnected } = useAccount();
 
-	const AuthConnectedMessage = () => {
-		return (<div className={style.AuthPage}>
-			<AuthBanner icon={authenticateImage} text={
-				`Your address: ${walletAddress} is connected. We just need you to sign a message to confirm it’s yours.`
-			} />
-			<CTAButton buttonText='Sign message'
-				click={() => {
-					signInWithEthereum()
-					setmessageSigned(!messageSigned)
-				}}
-			/>
-			<Link to='/dashboard'>
-				<button>{impactScore}fff</button>
-			</Link>
-		</div>
-		)
+	const goToDashboard = () => {
+		navigate('/dashboard')
 	}
 
-	// const AuthSignMessage = () => {
-	// 	return (<div className={style.AuthPage}>
-	// 		<AuthBanner icon={scanImage} text={
-	// 			`Scanning the blockchain for your evironmental impact`
-	// 		} />
-	// 		<CTAButton buttonText='calculate score'
-	// 			click={() => 'stuff'}
-	// 		/>
-	// 		<Link to='/dashboard'>
-	// 			<button>test</button>
-	// 		</Link>
-	// 	</div>
-	// 	)
-	// }
+	useEffect(() => {
+		messageSigned && goToDashboard()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [goToDashboard])
 
-	const AuthCalculateScore = () => {
-		useEffect(() => {
-			const getScore = async () => {
-				try {
-					// await axios.get(`${api_url}/api/abc/:${walletAddress}/`)
-					await axios.get(`https://impact-api.vercel.app/api/abc/:${walletAddress}/`)
-						.then(res => setImpactScore(res.data.score))
-				}
-				catch (error) {
-					console.log(error)
-				}
-			}
-			getScore()
-		}, [])
-
-		return (<div className={style.AuthPage}>
-			<AuthBanner icon={calculateImage} text={
-				`Calculating a score based on what we found...`
-			} />
-			<CTAButton buttonText='dashboard'
-				click={() => 'stuff'}
-			/>
-			<Link to='/dashboard'>
-				<button>test</button>
-			</Link>
-		</div>
-		)
-	}
-
-	return (
-		<div className={style.AuthPage}>
-			{messageSigned ?
-				<AuthCalculateScore />
-				:
-				<AuthConnectedMessage />
-			}
-		</div>
+	return (<div className={style.AuthPage}>
+		<AuthBanner icon={authenticateImage} text={
+			`Your address: ${address} is connected. We just need you to sign a message to confirm it’s yours.`
+		} />
+		<CTAButton buttonText='Sign message'
+			click={() => {
+				signInWithEthereum()
+				setmessageSigned(!messageSigned)
+			}}
+		/>
+		<Link to='/dashboard'>
+			<button>{impactScore}fff</button>
+		</Link>
+	</div>
 	)
 }
 
