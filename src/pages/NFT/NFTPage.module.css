@@ -1,0 +1,13 @@
+.NFTPage{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 50px;
+}
+
+.NFTDetails{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 40px;
+}

@@ -11,6 +11,7 @@ import authenticateImage from '../../assets/authentication.svg';
 import { UserContext } from '../../contexts/UserContext';
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { Link, useNavigate } from 'react-router-dom';
+import Spinner from '../../components/Spinner/Spinner';
 
 const domain = window.location.host;
 const origin = window.location.origin;
@@ -33,7 +34,7 @@ const createSiweMessage = (address, statement) => {
 const AuthPage = () => {
 	let navigate = useNavigate();
 	const [messageSigned, setmessageSigned] = useState(false);
-	const [calculateScore, setCalculateScore] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const { walletAddress, impactScore, setImpactScore } = useContext(UserContext);
 	const { address, isConnected } = useAccount();
 
@@ -42,6 +43,7 @@ const AuthPage = () => {
 	}
 
 	const signInWithEthereum = async () => {
+		setIsLoading(true);
 		const message = createSiweMessage(
 			await signer.getAddress(),
 			'Sign in with Ethereum to the app.'
@@ -54,9 +56,9 @@ const AuthPage = () => {
 
 		const res = await axios.post(`${API_URL}/verify`, {
 			body: JSON.stringify({ message, signature }),
-		});
-		setmessageSigned(!messageSigned)
-		console.log(res);
+		}).then(
+			() => console.log('running' + res)
+		)
 	}
 
 	useEffect(() => {
@@ -68,14 +70,14 @@ const AuthPage = () => {
 		<AuthBanner icon={authenticateImage} text={
 			`Your address: ${address} is connected. We just need you to sign a message to confirm it’s yours.`
 		} />
-		<CTAButton buttonText='Sign message'
-			click={() => {
-				signInWithEthereum()
-			}}
-		/>
-		<Link to='/dashboard'>
-			<button>{impactScore}fff</button>
-		</Link>
+
+		{
+			isLoading ? <Spinner/> : <CTAButton buttonText='Sign message'
+				click={() => {
+					signInWithEthereum()
+				}}
+			/>
+		}
 	</div>
 	)
 }

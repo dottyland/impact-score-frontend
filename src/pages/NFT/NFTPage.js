@@ -6,8 +6,8 @@ import ExplanationBox from '../../containers/ExplanationBox/ExplanationBox';
 
 const NFTPage = () => {
 	return (
-		<div>
-			<div>
+		<div className={style.NFTPage}>
+			<div className={style.NFTDetails}>
 				<img src={NFTImage} alt="" />
 				<span>Your NFT has been minted to address</span>
 				<CTAButtton buttonText='View ' />
