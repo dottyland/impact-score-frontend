@@ -39,7 +39,7 @@ const Home = () => {
 	const { walletAddress,
 		setWalletAddress,
 		isLoggedIn,
-		setLoggedIn
+		setLoggedIn,
 	} = useContext(UserContext)
 	// const [address, setAddress] = useState('')
 
@@ -49,8 +49,13 @@ const Home = () => {
 			method: 'eth_requestAccounts',
 		});
 		setWalletAddress(accounts[0])
-		setLoggedIn('logged in')
+		setLoggedIn(true)
 	}
+
+	useEffect(() => {
+		isLoggedIn && goToAuth()
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isLoggedIn])
 
 	return (
 		<div className={style.Home}>

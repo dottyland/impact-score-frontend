@@ -16,6 +16,7 @@ import './App.css'
 const App = () => {
 	const [walletAddress, setWalletAddress] = useState(null)
 	const [isLoggedIn, setLoggedIn] = useState(false)
+	const [impactScore, setImpactScore] = useState(80)
 
 	// if (walletAddress) {
 	// 	setLoggedIn(!isLoggedIn)
@@ -28,7 +29,9 @@ const App = () => {
 					walletAddress,
 					setWalletAddress,
 					isLoggedIn,
-					setLoggedIn
+					setLoggedIn,
+					impactScore,
+					setImpactScore
 				}}>
 
 				<NavBar/>
