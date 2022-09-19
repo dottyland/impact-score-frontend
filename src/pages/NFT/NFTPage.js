@@ -7,11 +7,12 @@ import ExplanationBox from '../../containers/ExplanationBox/ExplanationBox';
 const NFTPage = () => {
 	return (
 		<div>
-			<img src={NFTImage} alt="" />
-
-			<span>Your NFT has been minted to address</span>
-			<CTAButtton buttonText = 'View '/>
-			<ExplanationBox/>
+			<div>
+				<img src={NFTImage} alt="" />
+				<span>Your NFT has been minted to address</span>
+				<CTAButtton buttonText='View ' />
+			</div>
+			<ExplanationBox />
 		</div>
 	)
 }

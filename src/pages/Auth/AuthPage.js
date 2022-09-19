@@ -30,27 +30,6 @@ const createSiweMessage = (address, statement) => {
 	return message.prepareMessage();
 }
 
-let message = null;
-let signature = null;
-
-const signInWithEthereum = async () => {
-	const message = createSiweMessage(
-		await signer.getAddress(),
-		'Sign in with Ethereum to the app.'
-	);
-	sendForVerification()
-	console.log(message);
-	signature = await signer.signMessage(message);
-	console.log(signature);
-}
-
-const sendForVerification = async () => {
-    const res = await axios.post(`${API_URL}/verify`, {
-        body: JSON.stringify({ message, signature }),
-    });
-    console.log(res);
-}
-
 const AuthPage = () => {
 	let navigate = useNavigate();
 	const [messageSigned, setmessageSigned] = useState(false);
@@ -60,6 +39,24 @@ const AuthPage = () => {
 
 	const goToDashboard = () => {
 		navigate('/dashboard')
+	}
+
+	const signInWithEthereum = async () => {
+		const message = createSiweMessage(
+			await signer.getAddress(),
+			'Sign in with Ethereum to the app.'
+		);
+		const signature = await signer.signMessage(message);
+		console.log(message);
+
+		signature = await signer.signMessage(message);
+		console.log(signature);
+
+		const res = await axios.post(`${API_URL}/verify`, {
+			body: JSON.stringify({ message, signature }),
+		});
+		setmessageSigned(!messageSigned)
+		console.log(res);
 	}
 
 	useEffect(() => {
@@ -74,7 +71,6 @@ const AuthPage = () => {
 		<CTAButton buttonText='Sign message'
 			click={() => {
 				signInWithEthereum()
-				setmessageSigned(!messageSigned)
 			}}
 		/>
 		<Link to='/dashboard'>
