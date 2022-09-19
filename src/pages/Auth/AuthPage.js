@@ -16,7 +16,7 @@ const domain = window.location.host;
 const origin = window.location.origin;
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
-// const api_url = 'https://impact-api.vercel.app'
+const API_URL = 'https://impact-api.vercel.app'
 
 const createSiweMessage = (address, statement) => {
 	const message = new SiweMessage({
@@ -30,12 +30,25 @@ const createSiweMessage = (address, statement) => {
 	return message.prepareMessage();
 }
 
+let message = null;
+let signature = null;
+
 const signInWithEthereum = async () => {
 	const message = createSiweMessage(
 		await signer.getAddress(),
 		'Sign in with Ethereum to the app.'
 	);
-	console.log(await signer.signMessage(message));
+	sendForVerification()
+	console.log(message);
+	signature = await signer.signMessage(message);
+	console.log(signature);
+}
+
+const sendForVerification = async () => {
+    const res = await axios.post(`${API_URL}/verify`, {
+        body: JSON.stringify({ message, signature }),
+    });
+    console.log(res);
 }
 
 const AuthPage = () => {
