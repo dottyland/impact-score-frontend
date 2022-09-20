@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { ethers } from 'ethers';
 import { UserContext } from '../../contexts/UserContext';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 import ethereumIcon from '../../assets/ethereum.png'
 
 const domain = window.location.host;
@@ -62,14 +63,14 @@ const Home = () => {
 				{isLoggedIn}
 			</span>
 			<ExplanationBox />
-			<CTAButton
+			{/* <CTAButton
 				buttonIcon={ethereumIcon}
 				buttonText='connect wallet'
 				click={() => connectWalletHandler()}
 			// click={() => setValue(address)}
-			/>
+			/> */}
 
-			{/* <ConnectButton /> */}
+			<ConnectButton />
 			<button onClick={goToAuth}>test</button>
 		</div>
 	)

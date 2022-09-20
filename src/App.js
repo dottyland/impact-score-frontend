@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import AuthPage from './pages/Auth/AuthPage';
 import NavBar from './containers/NavBar/NavBar';
 import NFTPage from './pages/NFT/NFTPage';
+import NFTs from './pages/NFT/NFTs';
 import { UserContext } from './contexts/UserContext';
 import { WagmiConfig, createClient } from 'wagmi';
 import { getDefaultProvider } from 'ethers';
@@ -64,6 +65,10 @@ const App = () => {
 
 							<Route
 								exact path='/NFT' element={<NFTPage />}
+							/>
+
+							<Route
+								exact path='/NFTs' element={<NFTs />}
 							/>
 						</Routes>
 					</UserContext.Provider>

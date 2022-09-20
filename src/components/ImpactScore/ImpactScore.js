@@ -5,7 +5,6 @@ import style from './ImpactScore.module.css';
 import axios from "axios";
 import Spinner from '../Spinner/Spinner';
 
-
 const ImpactScore = ({ value, maxValue }) => {
 	const { address, isConnected } = useAccount()
 	const [score, setScore] = useState(0);
