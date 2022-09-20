@@ -78,6 +78,10 @@ const AuthPage = () => {
 				}}
 			/>
 		}
+
+		<button onClick = {goToDashboard}>
+			go to dashboard
+		</button>
 	</div>
 	)
 }
