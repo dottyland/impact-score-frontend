@@ -3,24 +3,20 @@ import style from './Home.module.css';
 import ExplanationBox from '../../containers/ExplanationBox/ExplanationBox'
 import CTAButton from '../../components/CTAButton/CTAButton';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { ethers } from 'ethers';
 import { UserContext } from '../../contexts/UserContext';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 import ethereumIcon from '../../assets/ethereum.png'
 
 const domain = window.location.host;
 const origin = window.location.origin;
-const provider = new ethers.providers.Web3Provider(window.ethereum);
-const signer = provider.getSigner();
-const { ethereum } = window
+// const provider = new ethers.providers.Web3Provider(window.ethereum);
+// const signer = provider.getSigner();
+const { ethereum } = window;
 
 const Home = () => {
 	let navigate = useNavigate();
-
-	const checkUserConnected = async () => {
-		const isunlocked = await window.ethereum._metamask.isUnlocked();
-		console.log(isunlocked)
-	}
 
 	// useEffect(async () => {
 	// 	checkUserConnected()
@@ -35,13 +31,24 @@ const Home = () => {
 		navigate('/auth')
 	}
 
+	const checkWallet = () => {
+		const { ethereum } = window;
+		if (!ethereum) {
+			console.log('Make sure you have Metamask');
+			return;
+		} else {
+			console.log('We have the ethereum object', ethereum);
+		}
+	}
+
 
 	const { walletAddress,
 		setWalletAddress,
 		isLoggedIn,
 		setLoggedIn,
 	} = useContext(UserContext)
-	// const [address, setAddress] = useState('')
+	const { address, isConnected } = useAccount()
+
 
 	const connectWalletHandler = async () => {
 		console.log('test')
@@ -49,13 +56,13 @@ const Home = () => {
 			method: 'eth_requestAccounts',
 		});
 		setWalletAddress(accounts[0])
-		setLoggedIn(true)
 	}
 
 	useEffect(() => {
-		isLoggedIn && goToAuth()
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isLoggedIn])
+		checkWallet()
+		isConnected && goToAuth()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isConnected])
 
 	return (
 		<div className={style.Home}>
@@ -67,12 +74,14 @@ const Home = () => {
 				{isLoggedIn}
 			</span>
 			<ExplanationBox />
-			<CTAButton
+			{/* <CTAButton
 				buttonIcon={ethereumIcon}
 				buttonText='connect wallet'
 				click={() => connectWalletHandler()}
 			// click={() => setValue(address)}
-			/>
+			/> */}
+
+			<ConnectButton />
 			<button onClick={goToAuth}>test</button>
 		</div>
 	)

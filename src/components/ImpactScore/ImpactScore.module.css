@@ -81,3 +81,10 @@
     		transform: rotate(0);
     	}
     }
+
+	.ImpactContainer{
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		gap: 20px;
+	}

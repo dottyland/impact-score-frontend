@@ -7,11 +7,25 @@
 	width: 480px;
 	gap: 20px;
 	border-radius: 10px;
-	padding: 40px;
+padding: 40px;
 }
 
 .BannerText {
 	font-weight: 500;
 	font-size: 1.2em;
 	text-align: center;
+}
+
+@media (max-width:720px) {
+
+}
+
+@media (max-width:480px) {
+	.AuthBanner{
+		width: 80%;
+	}
+
+	.BannerText{
+		width: 95%;
+	}
 }

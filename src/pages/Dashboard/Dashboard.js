@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useState, useContext} from 'react';
 import style from './Dashboard.module.css'
 import CTAButton from '../../components/CTAButton/CTAButton';
 import ExplanationBox from '../../containers/ExplanationBox/ExplanationBox';
@@ -9,11 +9,9 @@ import Spinner from '../../components/Spinner/Spinner';
 const Dashboard = () => {
 	const {impactScore} = useContext(UserContext)
 	console.log(useContext(UserContext))
-
 	return (
 		<div className={style.Dashboard}>
 			<div className={style.ImpactScoreContainer}>
-				<span>Your impact score is: Excellent</span>
 				<ImpactScore value={impactScore} maxValue={100} />
 			</div>
 

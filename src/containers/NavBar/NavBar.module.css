@@ -7,13 +7,13 @@
 .NavContent {
 	display: flex;
 	flex-direction: row;
-	gap: 600px;
+	gap: 800px;
 	margin: auto;
 	margin-bottom: 50px;
 }
 
 .NavLogo {
-	width: 80px;
+	width: 150px;
 }
 
 .NavConnectButton {
@@ -26,4 +26,23 @@
 
 .ButtonText {
 	padding: 20px;
+}
+
+@media (max-width:720px) {
+	.NavLogo{
+
+	}
+
+	.NavContent{
+	}
+}
+
+@media (max-width:480px) {
+	.NavLogo{
+		width: 100px;
+	}
+
+	.NavContent{
+		gap: 50px;
+	}
 }

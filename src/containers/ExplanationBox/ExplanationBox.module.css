@@ -16,3 +16,14 @@
 	flex-direction: column;
 	gap: 20px;
 }
+
+@media (max-width:720px) {
+	
+}
+
+@media (max-width:480px) {
+	.ExplanationBox{
+		width: 95%;
+
+	}
+}
