@@ -15,7 +15,6 @@ const NavBar = () => {
 		<div className={style.NavBar}>
 			<div className={style.NavContent}>
 				<img src={logo} alt="" className={style.NavLogo} />
-				<div></div>
 				<ConnectButton />
 			</div>
 		</div>

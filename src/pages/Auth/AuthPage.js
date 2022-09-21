@@ -15,8 +15,6 @@ import Spinner from '../../components/Spinner/Spinner';
 
 const domain = window.location.host;
 const origin = window.location.origin;
-const provider = new ethers.providers.Web3Provider(window.ethereum);
-const signer = provider.getSigner();
 const API_URL = 'https://impact-api.vercel.app'
 
 const createSiweMessage = (address, statement) => {
@@ -43,6 +41,8 @@ const AuthPage = () => {
 	}
 
 	const signInWithEthereum = async () => {
+		const provider = new ethers.providers.Web3Provider(window.ethereum);
+		const signer = provider.getSigner();
 		setIsLoading(true);
 		const message = createSiweMessage(
 			await signer.getAddress(),
@@ -72,14 +72,14 @@ const AuthPage = () => {
 		} />
 
 		{
-			isLoading ? <Spinner/> : <CTAButton buttonText='Sign message'
+			isLoading ? <Spinner /> : <CTAButton buttonText='Sign message'
 				click={() => {
 					signInWithEthereum()
 				}}
 			/>
 		}
 
-		<button onClick = {goToDashboard}>
+		<button onClick={goToDashboard}>
 			go to dashboard
 		</button>
 	</div>

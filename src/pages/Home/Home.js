@@ -11,9 +11,9 @@ import ethereumIcon from '../../assets/ethereum.png'
 
 const domain = window.location.host;
 const origin = window.location.origin;
-const provider = new ethers.providers.Web3Provider(window.ethereum);
-const signer = provider.getSigner();
-const { ethereum } = window
+// const provider = new ethers.providers.Web3Provider(window.ethereum);
+// const signer = provider.getSigner();
+const { ethereum } = window;
 
 const Home = () => {
 	let navigate = useNavigate();
@@ -29,6 +29,16 @@ const Home = () => {
 
 	const goToAuth = () => {
 		navigate('/auth')
+	}
+
+	const checkWallet = () => {
+		const { ethereum } = window;
+		if (!ethereum) {
+			console.log('Make sure you have Metamask');
+			return;
+		} else {
+			console.log('We have the ethereum object', ethereum);
+		}
 	}
 
 
@@ -49,6 +59,7 @@ const Home = () => {
 	}
 
 	useEffect(() => {
+		checkWallet()
 		isConnected && goToAuth()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isConnected])
