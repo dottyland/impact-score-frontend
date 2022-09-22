@@ -7,7 +7,7 @@ const ExplanationBox = () => {
 		<div className={style.ExplanationBox}>
 			<div className={style.ExplanationBoxContainer}>
 				<h1 className={style.ExplanationBoxText}>
-					Claim impact self
+				How to claim your Impact Self
 				</h1>
 
 				<div className={style.ExplanationWrapper}>

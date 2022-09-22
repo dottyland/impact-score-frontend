@@ -8,8 +8,8 @@ import { ethers } from 'ethers';
 import { UserContext } from '../../contexts/UserContext';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import ethereumIcon from '../../assets/ethereum.png'
+import HomeContent from '../../data/HomeContent'
 
-const domain = window.location.host;
 const origin = window.location.origin;
 // const provider = new ethers.providers.Web3Provider(window.ethereum);
 // const signer = provider.getSigner();
@@ -67,7 +67,7 @@ const Home = () => {
 	return (
 		<div className={style.Home}>
 			<span className={style.PageTitle}>
-				For 7.7bln consumers to halt climate crisis, impact must become part of identity
+				{HomeContent.pageTitle}
 			</span>
 			<span>
 				{walletAddress}
