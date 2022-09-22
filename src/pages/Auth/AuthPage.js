@@ -30,7 +30,7 @@ const createSiweMessage = (address, statement) => {
 }
 
 const AuthPage = () => {
-	let navigate = useNavigate();
+	const navigate = useNavigate();
 	const [messageSigned, setmessageSigned] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const { walletAddress, impactScore, setImpactScore } = useContext(UserContext);
@@ -38,6 +38,10 @@ const AuthPage = () => {
 
 	const goToDashboard = () => {
 		navigate('/dashboard')
+	}
+
+	const goToHome = () => {
+		navigate('/home')
 	}
 
 	const signInWithEthereum = async () => {
@@ -66,6 +70,11 @@ const AuthPage = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [goToDashboard])
 
+	useEffect(() => {
+		!isConnected && goToHome()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [goToHome])
+	
 	return (<div className={style.AuthPage}>
 		<AuthBanner icon={authenticateImage} text={
 			`Your address: ${address} is connected. We just need you to sign a message to confirm it’s yours.`
