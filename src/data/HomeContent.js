@@ -1,6 +1,7 @@
 const HomeContent = {
 	pageTitle: 'For 7.7bln consumers to halt climate crisis, impact must become part of identity.',
-	Explanation: [{
+	explanationData: [
+		{
 			NumberText: 'Step 1',
 			ExplanationText: 'Connect your wallet',
 			ExplanationDetails: ''

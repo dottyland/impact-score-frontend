@@ -12,20 +12,11 @@ import HomeContent from '../../data/HomeContent'
 
 const origin = window.location.origin;
 // const provider = new ethers.providers.Web3Provider(window.ethereum);
-// const signer = provider.getSigner();
+// const signer = provider.getSigner();	
 const { ethereum } = window;
 
 const Home = () => {
 	let navigate = useNavigate();
-
-	// useEffect(async () => {
-	// 	checkUserConnected()
-	// 	const accounts = await ethereum.request({
-	// 		method: 'eth_requestAccounts',
-	// 	});
-	// 	// setWalletAddress(accounts[0])
-	// 	return accounts[0]
-	// }, [])
 
 	const goToAuth = () => {
 		navigate('/auth')
@@ -73,14 +64,11 @@ const Home = () => {
 				{walletAddress}
 				{isLoggedIn}
 			</span>
-			<ExplanationBox />
-			{/* <CTAButton
-				buttonIcon={ethereumIcon}
-				buttonText='connect wallet'
-				click={() => connectWalletHandler()}
-			// click={() => setValue(address)}
-			/> */}
-
+			<ExplanationBox 
+				ExplanationBoxText = 'How to claim your Impact Self'
+				ExplanationContent = {HomeContent.explanationData}
+			/>
+			
 			<ConnectButton />
 			<button onClick={goToAuth}>test</button>
 		</div>

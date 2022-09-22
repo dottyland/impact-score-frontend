@@ -2,18 +2,18 @@ import React from 'react'
 import style from './ExplanationBox.module.css'
 import Explanation from '../../components/Explanation/Explanation';
 
-const ExplanationBox = () => {
+const ExplanationBox = props => {
 	return (
 		<div className={style.ExplanationBox}>
 			<div className={style.ExplanationBoxContainer}>
 				<h1 className={style.ExplanationBoxText}>
-				How to claim your Impact Self
+					{props.ExplanationBoxText}
 				</h1>
 
 				<div className={style.ExplanationWrapper}>
-					<Explanation />
-					<Explanation />
-					<Explanation />
+					{props.ExplanationContent.map(() => <Explanation 
+						
+					/>)}
 				</div>
 			</div>
 		</div>
