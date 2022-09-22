@@ -14,7 +14,6 @@ const Explanation = props => {
 				<div className={style.ExplanationTextWrapper}>
 					<span className={style.ExplanationText}>
 						{props.ExplanationText}
-						Lorem ipsum dolor sit amet consectetur adipisicing
 					</span>
 
 					<span className={style.ExplanationDetails}>

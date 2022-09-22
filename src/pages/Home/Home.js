@@ -68,7 +68,7 @@ const Home = () => {
 				ExplanationBoxText = 'How to claim your Impact Self'
 				ExplanationContent = {HomeContent.explanationData}
 			/>
-			
+
 			<ConnectButton />
 			<button onClick={goToAuth}>test</button>
 		</div>

@@ -11,9 +11,11 @@ const ExplanationBox = props => {
 				</h1>
 
 				<div className={style.ExplanationWrapper}>
-					{props.ExplanationContent.map(() => <Explanation 
-						
-					/>)}
+					{props.ExplanationContent.map((content) =>
+						<Explanation
+							NumberText={content.NumberText}
+							ExplanationText = {content.ExplanationText}
+						/>)}
 				</div>
 			</div>
 		</div>
