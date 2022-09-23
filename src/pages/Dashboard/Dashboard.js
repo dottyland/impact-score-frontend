@@ -48,7 +48,7 @@ const Dashboard = () => {
 				ExplanationContent={DashboardContent.explanationData}
 			/>
 
-			<Link to='/NFT'>
+			<Link to='/privacy'>
 				<CTAButton
 					buttonText='Choose privacy settings'
 					click={() => 'hi'} />

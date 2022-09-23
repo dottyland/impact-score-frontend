@@ -15,6 +15,7 @@ const ExplanationBox = props => {
 						<Explanation
 							NumberText={content.NumberText}
 							ExplanationText = {content.ExplanationText}
+							ExplanationDetails = {content.ExplanationDetails}
 						/>)}
 				</div>
 			</div>

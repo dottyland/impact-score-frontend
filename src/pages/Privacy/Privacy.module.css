@@ -1,0 +1,14 @@
+.PrivacyPage{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 50px;
+	padding: 64px;
+}
+
+.PrivacyDetails{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 40px;
+}

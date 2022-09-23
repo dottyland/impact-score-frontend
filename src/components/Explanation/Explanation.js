@@ -18,7 +18,6 @@ const Explanation = props => {
 
 					<span className={style.ExplanationDetails}>
 						{props.ExplanationDetails}
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae nobis provident nulla mollitia neque
 					</span>
 				</div>
 			</div>
