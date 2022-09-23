@@ -17,23 +17,25 @@ const Privacy = () => {
 			<div className={style.PrivacyDetails}>
 				<img src={NFTImage} alt="" />
 
-				<Link to='/NFTs'>
-					<CTAButtton buttonText='Make impact self public' />
-				</Link>
+				<div className={style.ButtonsContainer}>
+					<Link to='/NFTs'>
+						<CTAButtton buttonText='Make impact self public' />
+					</Link>
 
-				<Link to='/NFTs'>
-					<CTAButtton buttonText='Make impact self private' />
-				</Link>
-
+					<Link to='/NFTs'>
+						<CTAButtton buttonText='Make impact self private' />
+					</Link>
+				</div>
 			</div>
 			<ExplanationBox
 				ExplanationBoxText='Why we think you should make it public '
 				ExplanationContent={PrivacyContent.explanationData}
 			/>
 
-			<CTAButtton buttonText='Share on Twitter' />
-			<CTAButtton buttonText='Share on Lens' />
-
+			<div className={style.ButtonsContainer}>
+				<CTAButtton buttonText='Share on Twitter' />
+				<CTAButtton buttonText='Share on Lens' />
+			</div>
 		</div>
 	)
 }

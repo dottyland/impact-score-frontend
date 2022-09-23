@@ -35,9 +35,12 @@ const ImpactScore = ({ value, maxValue }) => {
 		isLoading ? <Spinner /> :
 			<div className={style.ImpactContainer}>
 				<span className={style.ImpactHeading}>
-					Your impact score is: Excellent
+					Your impact score is: Awesome!
 				</span>
-				
+
+				<span className={style.ImpactHeading}>
+					Congrats - you're on level 2!
+				</span>
 
 				<div className={style.indicator}>
 					<span className={style.bar} style={{ transform: `rotate(${deg}deg)` }} />

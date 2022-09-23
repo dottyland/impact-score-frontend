@@ -14,24 +14,26 @@ const NFTPage = () => {
 		<div className={style.NFTPage}>
 			<div className={style.NFTDetails}>
 				<img src={NFTImage} alt="" />
-				<span>Congratulations, you are #21!</span>
+				<span className={style.PageTitle}>Congratulations, you are #21!</span>
 
-				<Link to='/NFTs'>
-					<CTAButtton buttonText='Share on lenster' />
-				</Link>
+				<div className={style.ButtonsContainer}>
+					<Link to='/NFTs'>
+						<CTAButtton buttonText='Share on lenster' />
+					</Link>
 
-				<Link to='/NFTs'>
-					<CTAButtton buttonText='Add Lenster badge' />
-				</Link>
+					<Link to='/NFTs'>
+						<CTAButtton buttonText='Share on Twitter' />
+					</Link>
 
+				</div>
 			</div>
 			<ExplanationBox
 				ExplanationBoxText='Why share widely?'
 				ExplanationContent={NFTContent.explanationData}
 			/>
-
-			<CTAButtton buttonText='Share on Twitter' />
-
+			<Link to='/NFTs'>
+				<CTAButtton buttonText='View impact selves' />
+			</Link>
 		</div>
 	)
 }

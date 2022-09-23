@@ -74,24 +74,50 @@ const AuthPage = () => {
 		!isConnected && goToHome()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [goToHome])
-	
-	return (<div className={style.AuthPage}>
-		<AuthBanner icon={authenticateImage} text={
-			`Your address: ${address} is connected. We just need you to sign a message to confirm it’s yours.`
-		} />
 
-		{
-			isLoading ? <Spinner /> : <CTAButton buttonText='Sign message'
-				click={() => {
-					signInWithEthereum()
-				}}
-			/>
-		}
 
-		<button onClick={goToDashboard}>
-			go to dashboard
-		</button>
-	</div>
+	const AuthCalculate = () => {
+		return (
+			<div className={style.AuthPage}>
+				<AuthBanner icon={authenticateImage} text={
+					`Your address: ${address} is connected. We just need you to sign a message to confirm it’s yours.`
+				} />
+
+				{
+					isLoading ? <Spinner /> : <CTAButton buttonText='Sign message'
+						click={() => {
+							signInWithEthereum()
+						}}
+					/>
+				}
+
+				<button onClick={goToDashboard}>
+					go to dashboard
+				</button>
+			</div>
+		)
+	}
+
+	return (
+		<div className={style.AuthPage}>
+			<AuthBanner icon={authenticateImage} text={
+				`Your address: ${address} is connected. We just need you to sign a message to confirm it’s yours.`
+			} />
+
+			{
+				isLoading ? <Spinner /> : <CTAButton buttonText='Sign message'
+					click={() => {
+						signInWithEthereum()
+					}}
+				/>
+			}
+
+			<button onClick={goToDashboard}>
+				go to dashboard
+			</button>
+
+			<AuthCalculate/>
+		</div>
 	)
 }
 

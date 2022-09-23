@@ -7,8 +7,22 @@
 	gap: 80px;
 }
 
+.NFTs{
+	display: flex;
+	flex-direction: column;
+	gap: 64px;
+}
+
+.PageTitle {
+	width: 70%;
+	font-weight: 700;
+	font-size: 1.5em;
+	margin: auto;
+	text-align: center;
+}
+
 @media (max-width:720px) {
-	
+
 }
 
 @media (max-width:480px) {
