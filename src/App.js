@@ -30,6 +30,7 @@ const App = () => {
 	const [isLoggedIn, setLoggedIn] = useState(false)
 	const [mNonce,setMNonce]=useState("");
 	const [authToken,setAuthToken]=useState();
+	const [refreshToken,setRefreshToken]=useState();
 	// const [impactScore, setImpactScore] = useState(80)
 
 	if (ethereum === undefined) {
@@ -48,6 +49,8 @@ const App = () => {
 							setMNonce,
 							authToken,
 							setAuthToken,
+							refreshToken,
+							setRefreshToken,
 						}}>
 
 							<NavBar />

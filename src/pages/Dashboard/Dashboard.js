@@ -7,7 +7,7 @@ import getIcon from '../../assets/getIcon.svg';
 import selectIcon from '../../assets/selectIcon.png';
 import { UserContext } from '../../contexts/UserContext';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAccount, usePrepareContractWrite, useContractWrite, useSigner } from 'wagmi'
+import { useAccount, usePrepareContractWrite, useContractWrite, useSigner,signMessageAsync } from 'wagmi'
 import DashboardContent from '../../data/DashboardContent';
 import Lock from "../../abi/Unlock.json"
 import {ethers} from 'ethers';
@@ -15,7 +15,7 @@ import axios from 'axios'
 import { apolloClient } from '../../components/apollo-client';
 import { gql } from '@apollo/client'
 const Dashboard = () => {
-	const {authToken,setAuthToken}=useContext(UserContext);
+	const {authToken,setAuthToken,refreshToken,setRefreshToken}=useContext(UserContext);
 	const { address, isConnected } = useAccount();
 	const navigate = useNavigate();
 	const { config } = usePrepareContractWrite({
@@ -49,19 +49,37 @@ const { data, isLoading, isSuccess, write } = useContractWrite({
 	const signer = useSigner();
 	const signInWithEthereum = async () => {
 		
-		const query  = `
+		
+
+ const queryExample = async () => {
+	const query  = `
 		query Challenge {
-			challenge(request: { address: "0xdfd7D26fd33473F475b57556118F8251464a24eb" }) {
+			challenge(request: { address: "${address}" }) {
 			  text
 			}
 		  }
 `
-
- const queryExample = async () => {
    const response = await apolloClient.query({
     query: gql(query),
   })
-  console.log('Lens example data: ', response)
+  console.log('response :>> ', response);
+  const signature = await signMessageAsync(response.data.challenge.text);
+  console.log('signature :>> ', signature);
+  const qLogin = `mutation Authenticate {
+	authenticate(request: {
+	  address: "${address}",
+	  signature: "${signature}"
+	}) {
+	  accessToken
+	  refreshToken
+	}
+  }`
+   const login= await apolloClient.mutate({
+    mutation: gql(qLogin),
+  })
+  console.log('Lens example data: ', response,login)
+  setAuthToken(login.data.authenticate.accessToken)
+  setRefreshToken(login.data.authenticate.refreshToken)
 }
 queryExample();
 	}
