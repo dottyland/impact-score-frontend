@@ -16,7 +16,8 @@ const NFTPage = () => {
 	const contract=new ethers.Contract("0x8b88392F7D1C8e26eb7C5F2cbe0aEbDB239980Ce",Lock,provider);
 	const getTokenId=async()=>{
 		const res= await contract.tokenOfOwnerByIndex(address,ethers.BigNumber.from(0));
-		console.log('res :>> ', ethers.utils.formatEther(res));
+		console.log('res :>> ', ethers.BigNumber.toString(res));
+		setId(ethers.BigNumber.toString(res))
 	}
 	const tokenUri=async()=>{
 		const tokenId=ethers.BigNumber.from(id);
