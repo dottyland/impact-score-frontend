@@ -9,6 +9,7 @@ import lockIcon from '../../assets/lock.svg';
 import unlockIcon from '../../assets/unlock.svg';
 import twitterIcon from '../../assets/bi_twitter.svg';
 import shareIcon from '../../assets/share_lens.svg';
+import saveIcon from '../../assets/saveIcon.svg';
 import {useContractWrite, usePrepareContractWrite } from 'wagmi';
 import Hook from "../../abi/Hook.json";
 const Privacy = () => {
@@ -67,16 +68,28 @@ const Privacy = () => {
 				}
 
 				<div className={style.ButtonsContainer}>
+					{isPrivate ? <CTAButtton
 
-					<CTAButtton
 						click={changePrivacy}
 						buttonIcon={unlockIcon}
 						buttonText='MAKE IMPACT SELF PUBLIC' />
-
-					<CTAButtton
+						
+						: 
+						
+						<CTAButtton
 						click={changePrivacy}
 						buttonIcon={lockIcon}
 						buttonText='MAKE IMPACT SELF PRIVATE' />
+						}
+
+					<div className={style.Switch}>
+						<input type="checkbox" onChange={changePrivacy} />
+					</div>
+
+
+					<CTAButtton
+						buttonIcon={saveIcon}
+						buttonText='Save to chain' />
 				</div>
 			</div>
 			{/* <ExplanationBox
