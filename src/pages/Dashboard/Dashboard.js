@@ -8,7 +8,7 @@ import Spinner from '../../components/Spinner/Spinner';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAccount, usePrepareContractWrite, useContractWrite } from 'wagmi'
 import DashboardContent from '../../data/DashboardContent';
-import Lock from "../../abi/Unlock.json"
+import Lock from "../../abi/Unlock"
 import {ethers} from 'ethers';
 const Dashboard = () => {
 	const { address, isConnected } = useAccount();
