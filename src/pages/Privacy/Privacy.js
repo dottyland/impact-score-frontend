@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './Privacy.module.css';
 import NFTImage from '../../assets/NFT-test.png'
 import CTAButtton from '../../components/CTAButton/CTAButton';
@@ -12,6 +12,12 @@ import shareIcon from '../../assets/share_lens.svg';
 
 
 const Privacy = () => {
+	const [isPrivate, setIsPrivate] = useState(false)
+
+	const changePrivacy = () => {
+		isPrivate ? setIsPrivate(false) : setIsPrivate(true)
+	}
+
 	return (
 		<div className={style.PrivacyPage}>
 			<span className={style.PageTitle}>
@@ -19,20 +25,22 @@ const Privacy = () => {
 			</span>
 
 			<div className={style.PrivacyDetails}>
-				<img src={NFTImage} alt="" />
+				{
+					isPrivate === false ?
+						<img src={NFTImage} alt="" /> : 'Your impact self is Private'
+
+				}
 
 				<div className={style.ButtonsContainer}>
-					<Link to='/NFTs'>
-						<CTAButtton
-							buttonIcon={unlockIcon}
-							buttonText='MAKE IMPACT SELF PUBLIC' />
-					</Link>
+					<CTAButtton
+						click={changePrivacy}
+						buttonIcon={unlockIcon}
+						buttonText='MAKE IMPACT SELF PUBLIC' />
 
-					<Link to='/NFTs'>
-						<CTAButtton
-							buttonIcon={lockIcon}
-							buttonText='MAKE IMPACT SELF PRIVATE' />
-					</Link>
+					<CTAButtton
+						click={changePrivacy}
+						buttonIcon={lockIcon}
+						buttonText='MAKE IMPACT SELF PRIVATE' />
 				</div>
 			</div>
 			{/* <ExplanationBox

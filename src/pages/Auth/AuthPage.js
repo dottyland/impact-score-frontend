@@ -104,13 +104,17 @@ const AuthPage = () => {
 				<h1 className={style.PageTitle}>
 					What’s my Impact Score?
 				</h1>
-				<AuthBanner icon={authenticateImage} text={
-					`Scientists estimate that to avoid the worst effects of climate change, we need to cap global warming at 1.5°C.
-					
-					Based on a study by Oxfam and the Institute for European Environmental Policy, this requires average individual emissions to be less than 2.3tCO2/year. In the US, the average individual emits more than 14 tCO2 per year.                                          
-					
-					One way to help lower your emissions level is to offset your current emissions. So if you're retiring more than 11.7 CO2 tons per year, you're participating in avoiding the worst effects of global warming. Each token retired will contribute as points to improve your impact score.`
-				} />
+
+				<div className={style.AuthCalculateBanner}>
+					<img src={authenticateImage} alt="" />
+					<span>
+						Scientists estimate that to avoid the worst effects of climate change, we need to cap global warming at 1.5°C.
+						<p></p>
+						Based on a study by Oxfam and the Institute for European Environmental Policy, this requires average individual emissions to be less than 2.3tCO2/year. In the US, the average individual emits more than 14 tCO2 per year.
+						<p></p>
+						One way to help lower your emissions level is to offset your current emissions. So if you're retiring more than 11.7 CO2 tons per year, you're participating in avoiding the worst effects of global warming. Each token retired will contribute as points to improve your impact score.
+					</span>
+				</div>
 
 				<CTAButton
 					buttonIcon={calculateIcon}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './NFTPage.module.css';
 import NFTImage from '../../assets/NFTImage.png'
 import CTAButtton from '../../components/CTAButton/CTAButton';
@@ -9,11 +9,11 @@ import NFTContent from '../../data/NFTContent';
 
 const NFTPage = () => {
 	const { address, isConnected } = useAccount();
-
+	
 	return (
 		<div className={style.NFTPage}>
 			<div className={style.NFTDetails}>
-				<img src={NFTImage} alt="" />
+				<img src={NFTImage} alt="" className={style.NFTImage}/>
 				<span className={style.PageTitle}>Congratulations, you are Impact Self #21!</span>
 
 				<div className={style.ButtonsContainer}>
