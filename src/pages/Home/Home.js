@@ -70,7 +70,7 @@ const Home = () => {
 			/>
 
 			<ConnectButton />
-			<button onClick={goToAuth}>test</button>
+			{/* <button onClick={goToAuth}>test</button> */}
 		</div>
 	)
 }

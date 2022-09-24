@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './NFTs.module.css'
 import NFT from './NFT';
-import NFTImage from '../../assets/NFT-test.png'
+import NFTImage from '../../assets/NFTImage.png'
 
 const NFTs = () => {
 	return (
