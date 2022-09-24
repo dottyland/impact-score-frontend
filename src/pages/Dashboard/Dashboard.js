@@ -23,14 +23,14 @@ const Dashboard = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [goToHome])
 
-	const { impactScore } = useContext(UserContext)
+	// const { impactScore } = useContext(UserContext)
 	console.log(useContext(UserContext))
 
 
 	return (
 		<div className={style.Dashboard}>
 			<div className={style.ImpactScoreContainer}>
-				<ImpactScore value={impactScore} maxValue={100} />
+				<ImpactScore maxValue={100} />
 			</div>
 
 			<div className={style.DashboardButtons}>

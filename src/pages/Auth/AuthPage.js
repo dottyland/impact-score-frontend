@@ -20,11 +20,10 @@ const API_URL = 'https://impact-api.vercel.app'
 
 
 const AuthPage = () => {
-	let mNonce = "";
 	const navigate = useNavigate();
 	const [messageSigned, setmessageSigned] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-	const { walletAddress, impactScore, setImpactScore } = useContext(UserContext);
+	const { mNonce } = useContext(UserContext);
 	const { address, isConnected } = useAccount();
 	const { data: wsigner } = useSigner();
 	const { data, signMessageAsync } = useSignMessage();

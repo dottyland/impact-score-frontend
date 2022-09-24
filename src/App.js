@@ -28,7 +28,8 @@ const client = createClient({
 const App = () => {
 	const [walletAddress, setWalletAddress] = useState(null)
 	const [isLoggedIn, setLoggedIn] = useState(false)
-	const [impactScore, setImpactScore] = useState(80)
+	let mNonce = '';
+	// const [impactScore, setImpactScore] = useState(80)
 
 	if (ethereum === undefined) {
 		alert('get metamask!')
@@ -42,8 +43,7 @@ const App = () => {
 							setWalletAddress,
 							isLoggedIn,
 							setLoggedIn,
-							impactScore,
-							setImpactScore
+							mNonce
 						}}>
 
 							<NavBar />
