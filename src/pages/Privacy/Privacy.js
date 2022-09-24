@@ -23,18 +23,11 @@ const Privacy = () => {
 	
 	
 	const [val,setVal]=useState(false)
-	const togglePrivacy=async (val)=>{
-		const res = await fetch(datax);
-		const data=await res.json()
-		console.log('re :>> ', data);
-		await setVal(val)
-		write();
-	}
 	const { config } = usePrepareContractWrite({
 			addressOrName: '0x28F1f723CE0b469f241393804d1aC65106D96a8A',
 			contractInterface: Hook,
 			functionName: 'setPrivacy',
-			args:[val],
+			args:[isPrivate],
 			
 		  })
 	const { data, isLoading, isSuccess, write } = useContractWrite({
@@ -69,28 +62,11 @@ const Privacy = () => {
 				}
 				<Switch checked={isPrivate} onChange={changePrivacy}/>
 				<div className={style.ButtonsContainer}>
-					{isPrivate ? <CTAButtton
-
-						click={changePrivacy}
-						buttonIcon={unlockIcon}
-						buttonText='MAKE IMPACT SELF PUBLIC' />
-						
-						: 
-						
-						<CTAButtton
-						click={changePrivacy}
-						buttonIcon={lockIcon}
-						buttonText='MAKE IMPACT SELF PRIVATE' />
-						}
-
-					<div className={style.Switch}>
-						<input type="checkbox" onChange={changePrivacy} />
-					</div>
-
-
 					<CTAButtton
 						buttonIcon={saveIcon}
-						buttonText='Save to chain' />
+						buttonText='Save to chain'
+							click={write}
+						/>
 				</div>
 			</div>
 			{/* <ExplanationBox
