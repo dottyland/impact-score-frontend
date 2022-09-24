@@ -62,7 +62,7 @@ const { data, isLoading, isSuccess, write } = useContractWrite({
     query: gql(query),
   })
   console.log('response :>> ', response);
-  const signature = await signMessageAsync(response.data.challenge.text);
+  const signature = await signMessageAsync({message:response.data.challenge.text});
   console.log('signature :>> ', signature);
   const qLogin = `mutation Authenticate {
 	authenticate(request: {
