@@ -1,3 +1,7 @@
 .NFT{
 	width: fit-content;
 }
+
+.NFTImage{
+	max-width: 360px;
+}
