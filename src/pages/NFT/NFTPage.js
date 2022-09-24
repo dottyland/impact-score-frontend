@@ -41,7 +41,7 @@ const NFTPage = () => {
 		const tokenId=ethers.BigNumber.from(id);
 		const data= await contract.tokenURI(tokenId);
 		console.log('data :>> ', data);
-		console.log('window.btoa() :>> ', window.btoa(data));
+		console.log('window.btoa() :>> ', Buffer.from(data,'base64url'));
 		const Data= await fetch(data);
 		const jData=await Data.json();
 		console.log('jData :>> ', jData);
