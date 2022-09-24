@@ -46,10 +46,7 @@ const { data, isLoading, isSuccess, write } = useContractWrite({
 
 	// const { impactScore } = useContext(UserContext)
 	console.log(useContext(UserContext))
-	const signInWithEthereum = async () => {
-		
-		
-
+	
  const queryExample = async () => {
 	const query  = `
 		query Challenge {
@@ -80,9 +77,6 @@ const { data, isLoading, isSuccess, write } = useContractWrite({
   setAuthToken(login.data.authenticate.accessToken)
   setRefreshToken(login.data.authenticate.refreshToken)
 }
-queryExample();
-	}
-	signInWithEthereum();
 	return (
 		<div className={style.Dashboard}>
 			<div className={style.ImpactScoreContainer}>
@@ -111,6 +105,11 @@ queryExample();
 					buttonText='Choose privacy settings'
 					click={() => 'hi'} />
 			</Link>
+			<CTAButton
+						buttonIcon={getIcon}
+						buttonText='LEN'
+						click={queryExample} />
+			
 		</div>
 	)
 }
