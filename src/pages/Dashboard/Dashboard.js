@@ -50,9 +50,11 @@ const { data, isLoading, isSuccess, write } = useContractWrite({
 	const signInWithEthereum = async () => {
 		
 		const query  = `
-  query {
-    ping
-  }
+		query Challenge {
+			challenge(request: { address: "0xdfd7D26fd33473F475b57556118F8251464a24eb" }) {
+			  text
+			}
+		  }
 `
 
  const queryExample = async () => {
