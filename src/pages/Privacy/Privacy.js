@@ -18,7 +18,7 @@ const Privacy = () => {
 			addressOrName: '0x28F1f723CE0b469f241393804d1aC65106D96a8A',
 			contractInterface: Hook,
 			functionName: 'setPrivacy',
-			args:[ethers.BigNumber.from(12),val]
+			args:val
 			
 		  })
 	const { data, isLoading, isSuccess, write } = useContractWrite({
