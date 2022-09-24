@@ -35,11 +35,13 @@ const ImpactScore = ({ value, maxValue }) => {
 		isLoading ? <Spinner /> :
 			<div className={style.ImpactContainer}>
 				<span className={style.ImpactHeading}>
-					Your impact score is: Awesome!
+					{score >= 72 ?
+						'Your impact score is: Awesome!' : 'Your impact score is good!'}
 				</span>
 
 				<span className={style.ImpactHeading}>
-					Congrats - you're on level 2!
+					{score >= 72 ?
+						"Congrats - you're on level 2!" : "Congrats - you're on level 1!"}
 				</span>
 
 				<div className={style.indicator}>

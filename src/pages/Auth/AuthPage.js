@@ -20,7 +20,7 @@ const API_URL = 'https://impact-api.vercel.app'
 
 
 const AuthPage = () => {
-	let mNonce="";
+	let mNonce = "";
 	const navigate = useNavigate();
 	const [messageSigned, setmessageSigned] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
@@ -31,10 +31,10 @@ const AuthPage = () => {
 
 	const createSiweMessage = async (address, statement) => {
 
-		const res = await fetch(`${API_URL}/nonce/`+address, { credentials: "include" });
+		const res = await fetch(`${API_URL}/nonce/` + address, { credentials: "include" });
 		console.log('res :>> ', res.body);
 		console.log('origin :>> ', origin);
-		let temp=await res.text();
+		let temp = await res.text();
 		const message = new SiweMessage({
 			domain,
 			address,
@@ -44,7 +44,7 @@ const AuthPage = () => {
 			chainId: '1',
 			nonce: temp
 		});
-		mNonce=temp;
+		mNonce = temp;
 		return message.prepareMessage();
 	}
 
@@ -61,6 +61,7 @@ const AuthPage = () => {
 		const signer = wsigner;
 		console.log('object :>> ', signer.getAddress());
 		setIsLoading(true);
+		setmessageSigned(true)
 		console.log("1");
 		const message = await createSiweMessage(
 			await signer.getAddress(),
@@ -79,16 +80,17 @@ const AuthPage = () => {
 			credentials: 'include'
 		});
 		console.log(res);
-		const res2 = await fetch(`${API_URL}/api/calculate`, { 
-			method:"POST",
-			headers:{
+		const res2 = await fetch(`${API_URL}/api/calculate`, {
+			method: "POST",
+			headers: {
 				'Content-Type': 'application/json',
 			},
-			body:JSON.stringify({
-				address:await signer.getAddress(),
-				nonce:mNonce
+			body: JSON.stringify({
+				address: await signer.getAddress(),
+				nonce: mNonce
 			}),
-			credentials: "include" });
+			credentials: "include"
+		});
 
 		/**/
 		console.log('res2.json() :>> ', res2.json());
@@ -103,49 +105,48 @@ const AuthPage = () => {
 				<AuthBanner icon={authenticateImage} text={
 					`Scientists estimate that to avoid the worst effects of climate change, we need to cap global warming at 1.5°C. Based on a study by Oxfam and the Institute for European Environmental Policy, this requires average individual emissions to be less than 2.3tCO2/year. In the US, the average individual emits more than 14 tCO2 per year.                                           One way to help lower your emissions level is to offset your current emissions. So if you're retiring more than 11.7 CO2 tons per year, you're participating in avoiding the worst effects of global warming. Each token retired will contribute as points to improve your impact score.`
 				} />
-	
-				{
-					isLoading ? <Spinner /> :
-						<CTAButton buttonText='Calculate Score'
-							click={() => {
-								goToDashboard()
-							}}
-						/>
-				}
+
+				<CTAButton buttonText='Calculate Score'
+					click={() => {
+						goToDashboard()
+					}}
+				/>
 			</div>
 		)
 	}
-	
 
-	useEffect(() => {
-		messageSigned && goToDashboard()
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [goToDashboard])
+
+	// useEffect(() => {
+	// 	messageSigned && goToDashboard()
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [goToDashboard])
 
 	useEffect(() => {
 		!isConnected && goToHome()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [goToHome])
 
-	return (<div className={style.AuthPage}>
-		<AuthBanner icon={authenticateImage} text={
-			`Your address: ${address} is connected. We just need you to sign a message to confirm it’s yours.`
-		} />
+	return (
+		!messageSigned ?
+			<div className={style.AuthPage}>
+				<AuthBanner icon={authenticateImage} text={
+					`Your address: ${address} is connected. We just need you to sign a message to confirm it’s yours.`
+				} />
 
-		{
-			isLoading ? <Spinner /> : <CTAButton buttonText='Sign message'
-				click={() => {
-					signInWithEthereum()
-				}}
-			/>
-		}
+				{
+					isLoading ? <Spinner /> : <CTAButton buttonText='Sign message'
+						click={() => {
+							signInWithEthereum()
+						}}
+					/>
+				}
 
-		<button onClick={goToDashboard}>
-			go to dashboard
-		</button>
+				<button onClick={goToDashboard}>
+					go to dashboard
+				</button>
+			</div>
+			: <AuthCalculate />
 
-		{/* <AuthCalculate/> */}
-	</div>
 	)
 }
 
