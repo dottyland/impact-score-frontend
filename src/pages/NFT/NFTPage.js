@@ -20,7 +20,7 @@ const NFTPage = () => {
 		const a = ethers.BigNumber.from(res);
 		console.log('a :>> ', a,a.toString());
 		console.log('res.tos :>> ', res.toString());
-		setId(ethers.BigNumber.toString(res))
+		setId(res.toString())
 	}
 	const tokenUri=async()=>{
 		const tokenId=ethers.BigNumber.from(id);
