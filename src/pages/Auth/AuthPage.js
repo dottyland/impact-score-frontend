@@ -15,27 +15,12 @@ import Spinner from '../../components/Spinner/Spinner';
 
 const domain = window.location.host;
 const origin = window.location.origin;
-const API_URL = 'https://impact-api.vercel.app'
+const API_URL = 'https://impact-api.vercel.app/'
 
-const createSiweMessage = async (address, statement) => {
-
-	const res = await fetch(`${API_URL}/nonce`, { credentials: "include" });
-	console.log('res :>> ', res.body);
-	console.log('origin :>> ', origin);
-	const message = new SiweMessage({
-		domain,
-		address,
-		statement,
-		uri: origin,
-		version: '1',
-		chainId: '1',
-		nonce: await res.text()
-	});
-	return message.prepareMessage();
-}
 
 
 const AuthPage = () => {
+	let mNonce="";
 	const navigate = useNavigate();
 	const [messageSigned, setmessageSigned] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
@@ -43,6 +28,25 @@ const AuthPage = () => {
 	const { address, isConnected } = useAccount();
 	const { data: wsigner } = useSigner();
 	const { data, signMessageAsync } = useSignMessage();
+
+	const createSiweMessage = async (address, statement) => {
+
+		const res = await fetch(`${API_URL}/nonce/`+address, { credentials: "include" });
+		console.log('res :>> ', res.body);
+		console.log('origin :>> ', origin);
+		let temp=await res.text();
+		const message = new SiweMessage({
+			domain,
+			address,
+			statement,
+			uri: origin,
+			version: '1',
+			chainId: '1',
+			nonce: temp
+		});
+		mNonce=temp;
+		return message.prepareMessage();
+	}
 
 	const goToDashboard = () => {
 		navigate('/dashboard')
@@ -74,11 +78,20 @@ const AuthPage = () => {
 			body: JSON.stringify({ message: message, signature: signature }),
 			credentials: 'include'
 		});
-		console.log(res.json());
-		const res2 = await fetch(`${API_URL}/api/calculate`, { credentials: "include" });
-		console.log('re :>> ', await res2.json());
+		console.log(res);
+		const res2 = await fetch(`${API_URL}/api/calculate`, { 
+			method:"POST",
+			headers:{
+				'Content-Type': 'application/json',
+			},
+			body:JSON.stringify({
+				address:await signer.getAddress(),
+				nonce:mNonce
+			}),
+			credentials: "include" });
 
 		/**/
+		console.log('res2.json() :>> ', res2.json());
 	}
 
 	const AuthCalculate = () => {
