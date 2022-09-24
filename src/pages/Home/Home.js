@@ -8,24 +8,15 @@ import { ethers } from 'ethers';
 import { UserContext } from '../../contexts/UserContext';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import ethereumIcon from '../../assets/ethereum.png'
+import HomeContent from '../../data/HomeContent'
 
-const domain = window.location.host;
 const origin = window.location.origin;
 // const provider = new ethers.providers.Web3Provider(window.ethereum);
-// const signer = provider.getSigner();
+// const signer = provider.getSigner();	
 const { ethereum } = window;
 
 const Home = () => {
 	let navigate = useNavigate();
-
-	// useEffect(async () => {
-	// 	checkUserConnected()
-	// 	const accounts = await ethereum.request({
-	// 		method: 'eth_requestAccounts',
-	// 	});
-	// 	// setWalletAddress(accounts[0])
-	// 	return accounts[0]
-	// }, [])
 
 	const goToAuth = () => {
 		navigate('/auth')
@@ -67,19 +58,16 @@ const Home = () => {
 	return (
 		<div className={style.Home}>
 			<span className={style.PageTitle}>
-				For 7.7bln consumers to halt climate crisis, impact must become part of identity
+				{HomeContent.pageTitle}
 			</span>
 			<span>
 				{walletAddress}
 				{isLoggedIn}
 			</span>
-			<ExplanationBox />
-			{/* <CTAButton
-				buttonIcon={ethereumIcon}
-				buttonText='connect wallet'
-				click={() => connectWalletHandler()}
-			// click={() => setValue(address)}
-			/> */}
+			<ExplanationBox 
+				ExplanationBoxText = 'How to claim your Impact Self'
+				ExplanationContent = {HomeContent.explanationData}
+			/>
 
 			<ConnectButton />
 			<button onClick={goToAuth}>test</button>

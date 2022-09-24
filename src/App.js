@@ -5,6 +5,7 @@ import AuthPage from './pages/Auth/AuthPage';
 import NavBar from './containers/NavBar/NavBar';
 import NFTPage from './pages/NFT/NFTPage';
 import NFTs from './pages/NFT/NFTs';
+import Privacy from './pages/Privacy/Privacy';
 import { UserContext } from './contexts/UserContext';
 import { WagmiConfig, createClient } from 'wagmi';
 import { getDefaultProvider } from 'ethers';
@@ -70,6 +71,10 @@ const App = () => {
 
 								<Route
 									exact path='/NFTs' element={<NFTs />}
+								/>
+
+								<Route
+									exact path='/privacy' element={<Privacy />}
 								/>
 							</Routes>
 						</UserContext.Provider>
