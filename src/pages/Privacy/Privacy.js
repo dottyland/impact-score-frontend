@@ -9,8 +9,13 @@ import {useContractWrite, usePrepareContractWrite } from 'wagmi';
 import Hook from "../../abi/Hook.json";
 
 const Privacy = () => {
+	const datax="data:application/json;base64,eyJuYW1lIjogIkltcGFjdCBORlQiLCAiZGVzY3JpcHRpb24iOiAiSW1wYWN0IiwgImltYWdlX2RhdGEiOiAiSGVsbG8iLCJhdHRyaWJ1dGVzIiA6W3sgInNjb3JlIjogIlByaXZhdGUifV19"
+	
+	
 	const [val,setVal]=useState(false)
 	const togglePrivacy=async (val)=>{
+		const res = await fetch(datax);
+		console.log('re :>> ', res);
 		await setVal(val)
 		write();
 	}
