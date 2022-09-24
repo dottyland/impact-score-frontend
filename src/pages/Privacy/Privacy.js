@@ -5,9 +5,28 @@ import CTAButtton from '../../components/CTAButton/CTAButton';
 import { Link } from 'react-router-dom';
 import ExplanationBox from '../../containers/ExplanationBox/ExplanationBox';
 import PrivacyContent from '../../data/PrivacyContent';
-
-
+import {useContractWrite, usePrepareContractWrite } from 'wagmi';
+import Hook from "../../abi/Hook.json";
+import ethers from 'ethers';
 const Privacy = () => {
+	const [val,setVal]=(false)
+	const togglePrivacy=(val)=>{
+		setVal(val)
+		write();
+	}
+	const { config } = usePrepareContractWrite({
+			addressOrName: '0xecb504d39723b0be0e3a9aa33d646642d1051ee1',
+			contractInterface: JSON.stringify(Hook),
+			functionName: 'setPrivacy',
+			args:[ethers.BigNumber.from(12),val]
+			
+		  })
+	const { data, isLoading, isSuccess, write } = useContractWrite({
+			...config,
+			onSuccess(cancelData, variables, context) {
+				console.log("Success!", cancelData,variables,context);
+			  }
+	})
 	return (
 		<div className={style.PrivacyPage}>
 			<span className={style.PageTitle}>
@@ -18,13 +37,10 @@ const Privacy = () => {
 				<img src={NFTImage} alt="" />
 
 				<div className={style.ButtonsContainer}>
-					<Link to='/NFTs'>
-						<CTAButtton buttonText='Make impact self public' />
-					</Link>
+					
+						<CTAButtton buttonText='Make impact self public' click={()=>{togglePrivacy(false)}} />
 
-					<Link to='/NFTs'>
-						<CTAButtton buttonText='Make impact self private' />
-					</Link>
+						<CTAButtton buttonText='Make impact self private' click={()=>{togglePrivacy(true)}}/>
 				</div>
 			</div>
 			<ExplanationBox
