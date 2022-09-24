@@ -15,7 +15,7 @@ const Privacy = () => {
 		write();
 	}
 	const { config } = usePrepareContractWrite({
-			addressOrName: '0xecb504d39723b0be0e3a9aa33d646642d1051ee1',
+			addressOrName: '0x4FC3dE097fa7e9ca167C19D8A783CeA78dA912Bf',
 			contractInterface: JSON.stringify(Hook),
 			functionName: 'setPrivacy',
 			args:[ethers.BigNumber.from(12),val]
