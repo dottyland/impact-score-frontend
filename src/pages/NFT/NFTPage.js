@@ -21,6 +21,7 @@ import eyeIcon from '../../assets/eyeIcon.svg';
 const NFTPage = () => {
 	const provider=useProvider();
 	const {address}=useAccount();
+	const [nftData,setNftData]=useState({});
 	const [id,setId]=useState("-1")
 	const contract=new ethers.Contract("0x8b88392F7D1C8e26eb7C5F2cbe0aEbDB239980Ce",Lock,provider);
 	const getTokenId=async()=>{
@@ -35,6 +36,9 @@ const NFTPage = () => {
 		const tokenId=ethers.BigNumber.from(id);
 		const data= await contract.tokenURI(tokenId);
 		console.log('data :>> ', data);
+		const jData= await fetch(data);
+		console.log('jData :>> ', jData);
+		setNftData(jData);
 	}
 	useEffect(()=>{
 		getTokenId();
