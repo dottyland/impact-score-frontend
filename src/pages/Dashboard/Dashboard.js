@@ -3,6 +3,8 @@ import style from './Dashboard.module.css'
 import CTAButton from '../../components/CTAButton/CTAButton';
 import ExplanationBox from '../../containers/ExplanationBox/ExplanationBox';
 import ImpactScore from '../../components/ImpactScore/ImpactScore';
+import getIcon from '../../assets/getIcon.svg';
+import selectIcon from '../../assets/selectIcon.png';
 import { UserContext } from '../../contexts/UserContext';
 import Spinner from '../../components/Spinner/Spinner';
 import { Link, useNavigate } from 'react-router-dom';
@@ -54,9 +56,10 @@ const { data, isLoading, isSuccess, write } = useContractWrite({
 
 				
 					<CTAButton
-						buttonText='Impact NFT'
+						buttonIcon={getIcon}
+						buttonText='CLAIM IMPACT SELF NFT'
 						click={() => {write()}} />
-				
+
 			</div>
 
 			<ExplanationBox
@@ -66,6 +69,7 @@ const { data, isLoading, isSuccess, write } = useContractWrite({
 
 			<Link to='/privacy'>
 				<CTAButton
+					buttonIcon={selectIcon}
 					buttonText='Choose privacy settings'
 					click={() => 'hi'} />
 			</Link>
