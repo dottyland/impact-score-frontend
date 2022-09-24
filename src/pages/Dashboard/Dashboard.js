@@ -7,17 +7,17 @@ import getIcon from '../../assets/getIcon.svg';
 import selectIcon from '../../assets/selectIcon.png';
 import { UserContext } from '../../contexts/UserContext';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAccount, usePrepareContractWrite, useContractWrite, useSigner,signMessageAsync } from 'wagmi'
+import { useAccount, usePrepareContractWrite, useContractWrite, useSignMessage } from 'wagmi'
 import DashboardContent from '../../data/DashboardContent';
 import Lock from "../../abi/Unlock.json"
 import {ethers} from 'ethers';
-import axios from 'axios'
 import { apolloClient } from '../../components/apollo-client';
 import { gql } from '@apollo/client'
 const Dashboard = () => {
 	const {authToken,setAuthToken,refreshToken,setRefreshToken}=useContext(UserContext);
 	const { address, isConnected } = useAccount();
 	const navigate = useNavigate();
+	const { signMessageAsync } = useSignMessage();
 	const { config } = usePrepareContractWrite({
 		addressOrName: '0x7291EBbf2633b6816545Ae33BA5795da3b0E983B',
 		contractInterface: Lock,
@@ -46,7 +46,6 @@ const { data, isLoading, isSuccess, write } = useContractWrite({
 
 	// const { impactScore } = useContext(UserContext)
 	console.log(useContext(UserContext))
-	const signer = useSigner();
 	const signInWithEthereum = async () => {
 		
 		
