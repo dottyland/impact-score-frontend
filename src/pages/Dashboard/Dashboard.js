@@ -12,6 +12,8 @@ import DashboardContent from '../../data/DashboardContent';
 import Lock from "../../abi/Unlock.json"
 import {ethers} from 'ethers';
 import axios from 'axios'
+import { apolloClient } from '../../components/apollo-client';
+import { gql } from '@apollo/client'
 const Dashboard = () => {
 	const {authToken,setAuthToken}=useContext(UserContext);
 	const { address, isConnected } = useAccount();
@@ -47,24 +49,19 @@ const { data, isLoading, isSuccess, write } = useContractWrite({
 	const signer = useSigner();
 	const signInWithEthereum = async () => {
 		
-		const endpoint = "https://api-mumbai.lens.dev";
-	const challengeQuery =`query Challenge {
-  challenge(request: { address: "${address}" }) {
-    text
+		const query  = `
+  query {
+    ping
   }
-}`;
+`
 
-	const response = await axios( endpoint,{
-  query: challengeQuery
-	});
-	
-		console.log('response.data :>> ', response.data);
-		/**const response2=await axios({
-			url:endpoint,
-			method:'post',
-			headers:headers2,
-			data:graphqlQuery
-		})**/
+ const queryExample = async () => {
+   const response = await apolloClient.query({
+    query: gql(query),
+  })
+  console.log('Lens example data: ', response)
+}
+queryExample();
 	}
 	signInWithEthereum();
 	return (
