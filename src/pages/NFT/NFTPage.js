@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import style from './NFTPage.module.css';
 import NFTImage from '../../assets/NFT-test.png'
 import CTAButtton from '../../components/CTAButton/CTAButton';
 import ExplanationBox from '../../containers/ExplanationBox/ExplanationBox';
-import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import { useAccount, useProvider } from 'wagmi'
 import { Link } from 'react-router-dom';
 import NFTContent from '../../data/NFTContent';
+import Lock from '../../abi/Unlock.json'
+import {ethers} from 'ethers'
 
 const NFTPage = () => {
-	const { address, isConnected } = useAccount();
-
+	const provider=useProvider();
+	const {address}=useAccount();
+	const [id,setId]=useState(-1)
+	const contract=new ethers.Contract("0x8b88392F7D1C8e26eb7C5F2cbe0aEbDB239980Ce",Lock,provider);
+	const getTokenId=async()=>{
+		const res= await contract.tokenOfOwnerByIndex(address,ethers.BigNumber.from(0));
+		console.log('res :>> ', res);
+	}
+	useEffect(()=>{
+		getTokenId();
+	},[])
 	return (
 		<div className={style.NFTPage}>
 			<div className={style.NFTDetails}>
