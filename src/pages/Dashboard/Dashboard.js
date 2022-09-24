@@ -8,13 +8,29 @@ import selectIcon from '../../assets/selectIcon.png';
 import { UserContext } from '../../contexts/UserContext';
 import Spinner from '../../components/Spinner/Spinner';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import { useAccount, usePrepareContractWrite, useContractWrite } from 'wagmi'
 import DashboardContent from '../../data/DashboardContent';
-
-
+import Lock from "../../abi/Unlock.json"
+import {ethers} from 'ethers';
 const Dashboard = () => {
 	const { address, isConnected } = useAccount();
 	const navigate = useNavigate();
+	const { config } = usePrepareContractWrite({
+		addressOrName: '0x8b88392F7D1C8e26eb7C5F2cbe0aEbDB239980Ce',
+		contractInterface: Lock,
+		functionName: 'purchase',
+		args:[[ethers.BigNumber.from(0)],[address],["0x0000000000000000000000000000000000000000"],[address],["0x0000000000000000000000000000000000000000"]],
+		
+	  })
+const { data, isLoading, isSuccess, write } = useContractWrite({
+		...config,
+		onSuccess(cancelData, variables, context) {
+			console.log("Success!", cancelData,variables,context);
+		  },
+		  onError(error){
+			console.log('error :>> ', error);
+		  }
+})
 
 	const goToHome = () => {
 		navigate('/home')
@@ -38,12 +54,12 @@ const Dashboard = () => {
 			<div className={style.DashboardButtons}>
 				{/* <CTAButton buttonText='Share to lens' click={() => 'hi'} /> */}
 
-				<Link to='/NFT'>
+				
 					<CTAButton
 						buttonIcon={getIcon}
 						buttonText='CLAIM IMPACT SELF NFT'
-						click={() => 'Impact NFT'} />
-				</Link>
+						click={() => {write()}} />
+
 			</div>
 
 			<ExplanationBox

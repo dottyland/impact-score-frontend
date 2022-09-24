@@ -5,27 +5,39 @@ import style from './ImpactScore.module.css';
 import axios from "axios";
 import Spinner from '../Spinner/Spinner';
 
+const API_URL = 'https://impact-api.vercel.app'
 const ImpactScore = ({ value, maxValue }) => {
 	const { address, isConnected } = useAccount()
 	const [score, setScore] = useState(0);
 	const [isLoading, setIsLoading] = useState(false)
-
+	const {mNonce}=useContext(UserContext)
+	
 	useEffect(() => {
 		async function calculate() {
 			setIsLoading(true)
-			const result = await axios.get("https://impact-api.vercel.app/api/abc/" + address, {}).then((res) => {
-				setIsLoading(false)
-				return res
-			})
-				.catch((e) => {
-					console.log('e :>> ', e);
-					return e.response;
-
-				})
-			if (result.status === 200)
-				setScore(result.data.score);
+			const res2 = await fetch(`${API_URL}/api/calculate`, {
+				method: "POST",
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					address: await address,
+					nonce: mNonce
+				}),
+				credentials: "include"
+			});
+			if(res2.status===200)
+				{
+					console.log("object",res2);
+					let data=await res2.json();
+					setScore( data.score);
+				}
 			else
-				setScore(25);
+			{
+				console.log("Error");
+			}
+			setIsLoading(false)
+			
 		}
 		calculate();
 	}, [address])
