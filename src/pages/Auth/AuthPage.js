@@ -23,7 +23,7 @@ const AuthPage = () => {
 	const navigate = useNavigate();
 	const [messageSigned, setmessageSigned] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-	const { mNonce } = useContext(UserContext);
+	const { mNonce, setMNonce } = useContext(UserContext);
 	const { address, isConnected } = useAccount();
 	const { data: wsigner } = useSigner();
 	const { data, signMessageAsync } = useSignMessage();
@@ -43,7 +43,7 @@ const AuthPage = () => {
 			chainId: '1',
 			nonce: temp
 		});
-		mNonce = temp;
+		setMNonce(temp);
 		return message.prepareMessage();
 	}
 
@@ -79,20 +79,7 @@ const AuthPage = () => {
 			credentials: 'include'
 		});
 		console.log(res);
-		const res2 = await fetch(`${API_URL}/api/calculate`, {
-			method: "POST",
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				address: await signer.getAddress(),
-				nonce: mNonce
-			}),
-			credentials: "include"
-		});
 
-		/**/
-		console.log('res2.json() :>> ', res2.json());
 	}
 
 	const AuthCalculate = () => {
