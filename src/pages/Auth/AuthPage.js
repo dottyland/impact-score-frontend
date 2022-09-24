@@ -19,20 +19,21 @@ const API_URL = 'https://impact-api.vercel.app'
 
 const createSiweMessage = async (address, statement) => {
 
-	const res = await fetch(`${API_URL}/nonce`,{credentials:"include"});
+	const res = await fetch(`${API_URL}/nonce`, { credentials: "include" });
 	console.log('res :>> ', res.body);
 	console.log('origin :>> ', origin);
-    const message = new SiweMessage({
+	const message = new SiweMessage({
 		domain,
-        address,
-        statement,
-		uri:origin,
-        version: '1',
-        chainId: '1',
-        nonce: await res.text()
-    });
+		address,
+		statement,
+		uri: origin,
+		version: '1',
+		chainId: '1',
+		nonce: await res.text()
+	});
 	return message.prepareMessage();
 }
+
 
 const AuthPage = () => {
 	const navigate = useNavigate();
@@ -40,8 +41,8 @@ const AuthPage = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const { walletAddress, impactScore, setImpactScore } = useContext(UserContext);
 	const { address, isConnected } = useAccount();
-	const {data:wsigner} = useSigner();
-	const {data, signMessageAsync } = useSignMessage();
+	const { data: wsigner } = useSigner();
+	const { data, signMessageAsync } = useSignMessage();
 
 	const goToDashboard = () => {
 		navigate('/dashboard')
@@ -50,6 +51,7 @@ const AuthPage = () => {
 	const goToHome = () => {
 		navigate('/home')
 	}
+
 
 	const signInWithEthereum = async () => {
 		const signer = wsigner;
@@ -61,23 +63,46 @@ const AuthPage = () => {
 			'Sign in with Ethereum to the app.'
 		);
 		console.log("2");
-		const signature = await signMessageAsync({message});
-		console.log("a",message);
-		console.log("b",signature);
-		const res = await fetch(`${API_URL}/verify`,{
+		const signature = await signMessageAsync({ message });
+		console.log("a", message);
+		console.log("b", signature);
+		const res = await fetch(`${API_URL}/verify`, {
 			method: "POST",
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({message:message,signature:signature }),
-			credentials:'include'
+			body: JSON.stringify({ message: message, signature: signature }),
+			credentials: 'include'
 		});
 		console.log(res.json());
-		const res2 = await fetch(`${API_URL}/api/calculate`,{credentials:"include"});
+		const res2 = await fetch(`${API_URL}/api/calculate`, { credentials: "include" });
 		console.log('re :>> ', await res2.json());
 
 		/**/
 	}
+
+	const AuthCalculate = () => {
+		return (
+			<div className={style.AuthPage}>
+				<h1>
+					What’s my Impact Score?
+				</h1>
+				<AuthBanner icon={authenticateImage} text={
+					`Scientists estimate that to avoid the worst effects of climate change, we need to cap global warming at 1.5°C. Based on a study by Oxfam and the Institute for European Environmental Policy, this requires average individual emissions to be less than 2.3tCO2/year. In the US, the average individual emits more than 14 tCO2 per year.                                           One way to help lower your emissions level is to offset your current emissions. So if you're retiring more than 11.7 CO2 tons per year, you're participating in avoiding the worst effects of global warming. Each token retired will contribute as points to improve your impact score.`
+				} />
+	
+				{
+					isLoading ? <Spinner /> :
+						<CTAButton buttonText='Calculate Score'
+							click={() => {
+								goToDashboard()
+							}}
+						/>
+				}
+			</div>
+		)
+	}
+	
 
 	useEffect(() => {
 		messageSigned && goToDashboard()
@@ -88,7 +113,7 @@ const AuthPage = () => {
 		!isConnected && goToHome()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [goToHome])
-	
+
 	return (<div className={style.AuthPage}>
 		<AuthBanner icon={authenticateImage} text={
 			`Your address: ${address} is connected. We just need you to sign a message to confirm it’s yours.`
@@ -105,6 +130,8 @@ const AuthPage = () => {
 		<button onClick={goToDashboard}>
 			go to dashboard
 		</button>
+
+		{/* <AuthCalculate/> */}
 	</div>
 	)
 }
