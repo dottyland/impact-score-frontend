@@ -12,15 +12,24 @@ import {ethers} from 'ethers'
 const NFTPage = () => {
 	const provider=useProvider();
 	const {address}=useAccount();
-	const [id,setId]=useState(-1)
+	const [id,setId]=useState("-1")
 	const contract=new ethers.Contract("0x8b88392F7D1C8e26eb7C5F2cbe0aEbDB239980Ce",Lock,provider);
 	const getTokenId=async()=>{
 		const res= await contract.tokenOfOwnerByIndex(address,ethers.BigNumber.from(0));
-		console.log('res :>> ', res);
+		console.log('res :>> ', ethers.utils.formatEther(res));
+	}
+	const tokenUri=async()=>{
+		const tokenId=ethers.BigNumber.from(id);
+		const data= await contract.tokenURI(tokenId);
+		console.log('data :>> ', data);
 	}
 	useEffect(()=>{
 		getTokenId();
-	},[])
+	},[address])
+	useEffect(()=>{
+		if(id!=="-1")
+		tokenUri();
+	},[id])
 	return (
 		<div className={style.NFTPage}>
 			<div className={style.NFTDetails}>
