@@ -72,7 +72,7 @@ const AuthPage = () => {
 			body: JSON.stringify({message:message,signature:signature }),
 			credentials:'include'
 		});
-		console.log(res);
+		console.log(res.json());
 		const res2 = await fetch(`${API_URL}/api/calculate`,{credentials:"include"});
 		console.log('re :>> ', await res2.json());
 
