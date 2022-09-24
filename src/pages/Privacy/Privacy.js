@@ -15,7 +15,8 @@ const Privacy = () => {
 	const [val,setVal]=useState(false)
 	const togglePrivacy=async (val)=>{
 		const res = await fetch(datax);
-		console.log('re :>> ', res);
+		const data=await res.json()
+		console.log('re :>> ', data);
 		await setVal(val)
 		write();
 	}
