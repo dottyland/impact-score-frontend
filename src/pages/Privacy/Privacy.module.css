@@ -6,9 +6,23 @@
 	padding: 64px;
 }
 
+.PageTitle {
+	width: 70%;
+	font-weight: 700;
+	font-size: 1.5em;
+	margin: auto;
+	text-align: center;
+}
+
 .PrivacyDetails{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: 40px;
+}
+
+.ButtonsContainer{
+	display: flex;
+	flex-direction: row;
+	gap: 30px;
 }

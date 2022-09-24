@@ -89,24 +89,54 @@ const AuthPage = () => {
 		!isConnected && goToHome()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [goToHome])
-	
-	return (<div className={style.AuthPage}>
-		<AuthBanner icon={authenticateImage} text={
-			`Your address: ${address} is connected. We just need you to sign a message to confirm it’s yours.`
-		} />
 
-		{
-			isLoading ? <Spinner /> : <CTAButton buttonText='Sign message'
-				click={() => {
-					signInWithEthereum()
-				}}
-			/>
-		}
 
-		<button onClick={goToDashboard}>
-			go to dashboard
-		</button>
-	</div>
+	const AuthCalculate = () => {
+		return (
+			<div className={style.AuthPage}>
+			<h1>
+			What’s my Impact Score?
+			</h1>
+				<AuthBanner icon={authenticateImage} text={
+					`Scientists estimate that to avoid the worst effects of climate change, we need to cap global warming at 1.5°C. Based on a study by Oxfam and the Institute for European Environmental Policy, this requires average individual emissions to be less than 2.3tCO2/year. In the US, the average individual emits more than 14 tCO2 per year.                                           One way to help lower your emissions level is to offset your current emissions. So if you're retiring more than 11.7 CO2 tons per year, you're participating in avoiding the worst effects of global warming. Each token retired will contribute as points to improve your impact score.`
+				} />
+
+				{
+					isLoading ? <Spinner /> : 
+					<CTAButton buttonText='Calculate Score'
+						click={() => {
+							goToDashboard()
+						}}
+					/>
+				}
+
+				<button onClick={goToDashboard}>
+					go to dashboard
+				</button>
+			</div>
+		)
+	}
+
+	return (
+		<div className={style.AuthPage}>
+			<AuthBanner icon={authenticateImage} text={
+				`Your address: ${address} is connected. We just need you to sign a message to confirm it’s yours.`
+			} />
+
+			{
+				isLoading ? <Spinner /> : <CTAButton buttonText='Sign message'
+					click={() => {
+						signInWithEthereum()
+					}}
+				/>
+			}
+
+			<button onClick={goToDashboard}>
+				go to dashboard
+			</button>
+
+			<AuthCalculate/>
+		</div>
 	)
 }
 
