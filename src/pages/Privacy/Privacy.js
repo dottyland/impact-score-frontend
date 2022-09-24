@@ -7,7 +7,7 @@ import ExplanationBox from '../../containers/ExplanationBox/ExplanationBox';
 import PrivacyContent from '../../data/PrivacyContent';
 import {useContractWrite, usePrepareContractWrite } from 'wagmi';
 import Hook from "../../abi/Hook.json";
-import ethers from 'ethers';
+import {ethers} from 'ethers';
 const Privacy = () => {
 	const [val,setVal]=(false)
 	const togglePrivacy=(val)=>{
