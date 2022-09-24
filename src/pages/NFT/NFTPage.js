@@ -21,9 +21,9 @@ const NFTPage = () => {
 						<CTAButtton buttonText='Share on lenster' />
 					</Link>
 
-					<Link to='/NFTs'>
+					<a href="https://twitter.com/intent/tweet?text=I%20just%20claimed%20my%20Impact%20Self!%20Jealous?%20Join%20me%20in%20saving%20the%20🌍%20with%20Dottyland!">
 						<CTAButtton buttonText='Share on Twitter' />
-					</Link>
+					</a>
 
 				</div>
 			</div>
