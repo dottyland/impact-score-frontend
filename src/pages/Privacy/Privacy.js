@@ -10,16 +10,38 @@ import unlockIcon from '../../assets/unlock.svg';
 import twitterIcon from '../../assets/bi_twitter.svg';
 import shareIcon from '../../assets/share_lens.svg';
 import saveIcon from '../../assets/saveIcon.svg';
-
-
-
+import {useContractWrite, usePrepareContractWrite } from 'wagmi';
+import Hook from "../../abi/Hook.json";
 const Privacy = () => {
 	const [isPrivate, setIsPrivate] = useState(false)
 
 	const changePrivacy = () => {
 		isPrivate ? setIsPrivate(false) : setIsPrivate(true)
 	}
-
+	const datax="data:application/json;base64,eyJuYW1lIjogIkltcGFjdCBORlQiLCAiZGVzY3JpcHRpb24iOiAiSW1wYWN0IiwgImltYWdlX2RhdGEiOiAiSGVsbG8iLCJhdHRyaWJ1dGVzIiA6W3sgInNjb3JlIjogIlByaXZhdGUifV19"
+	
+	
+	const [val,setVal]=useState(false)
+	const togglePrivacy=async (val)=>{
+		const res = await fetch(datax);
+		const data=await res.json()
+		console.log('re :>> ', data);
+		await setVal(val)
+		write();
+	}
+	const { config } = usePrepareContractWrite({
+			addressOrName: '0x28F1f723CE0b469f241393804d1aC65106D96a8A',
+			contractInterface: Hook,
+			functionName: 'setPrivacy',
+			args:[val],
+			
+		  })
+	const { data, isLoading, isSuccess, write } = useContractWrite({
+			...config,
+			onSuccess(cancelData, variables, context) {
+				console.log("Success!", cancelData,variables,context);
+			  }
+	})
 	return (
 		<div className={style.PrivacyPage}>
 			<span className={style.PageTitle}>
@@ -47,6 +69,7 @@ const Privacy = () => {
 
 				<div className={style.ButtonsContainer}>
 					{isPrivate ? <CTAButtton
+
 						click={changePrivacy}
 						buttonIcon={unlockIcon}
 						buttonText='MAKE IMPACT SELF PUBLIC' />

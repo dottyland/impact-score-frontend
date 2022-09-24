@@ -28,7 +28,7 @@ const client = createClient({
 const App = () => {
 	const [walletAddress, setWalletAddress] = useState(null)
 	const [isLoggedIn, setLoggedIn] = useState(false)
-	let mNonce = '';
+	const [mNonce,setMNonce]=useState("");
 	// const [impactScore, setImpactScore] = useState(80)
 
 	if (ethereum === undefined) {
@@ -43,7 +43,8 @@ const App = () => {
 							setWalletAddress,
 							isLoggedIn,
 							setLoggedIn,
-							mNonce
+							mNonce,
+							setMNonce,
 						}}>
 
 							<NavBar />
