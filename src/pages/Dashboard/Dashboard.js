@@ -47,36 +47,7 @@ const { data, isLoading, isSuccess, write } = useContractWrite({
 	// const { impactScore } = useContext(UserContext)
 	console.log(useContext(UserContext))
 	
- const queryExample = async () => {
-	const query  = `
-		query Challenge {
-			challenge(request: { address: "${address}" }) {
-			  text
-			}
-		  }
-`
-   const response = await apolloClient.query({
-    query: gql(query),
-  })
-  console.log('response :>> ', response);
-  const signature = await signMessageAsync({message:response.data.challenge.text});
-  console.log('signature :>> ', signature);
-  const qLogin = `mutation Authenticate {
-	authenticate(request: {
-	  address: "${address}",
-	  signature: "${signature}"
-	}) {
-	  accessToken
-	  refreshToken
-	}
-  }`
-   const login= await apolloClient.mutate({
-    mutation: gql(qLogin),
-  })
-  console.log('Lens example data: ', response,login)
-  setAuthToken(login.data.authenticate.accessToken)
-  setRefreshToken(login.data.authenticate.refreshToken)
-}
+ 
 	return (
 		<div className={style.Dashboard}>
 			<div className={style.ImpactScoreContainer}>
@@ -107,8 +78,8 @@ const { data, isLoading, isSuccess, write } = useContractWrite({
 			</Link>
 			<CTAButton
 						buttonIcon={getIcon}
-						buttonText='LEN'
-						click={queryExample} />
+						buttonText='sign in with lens'
+						/>
 			
 		</div>
 	)
