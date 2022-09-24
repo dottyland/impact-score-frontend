@@ -47,7 +47,7 @@ const NFTPage = () => {
 		<div className={style.NFTPage}>
 			<div className={style.NFTDetails}>
 				<img src={NFTImage} alt="" className={style.NFTImage} />
-				<span className={style.PageTitle}>Congratulations, you are Impact Self #21!</span>
+				<span className={style.PageTitle}>Congratulations, you are Impact Self #{id}!</span>
 
 				<div className={style.ButtonsContainer}>
 					<CTAButtton
