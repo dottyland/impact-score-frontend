@@ -6,13 +6,14 @@ import ImpactScore from '../../components/ImpactScore/ImpactScore';
 import getIcon from '../../assets/getIcon.svg';
 import selectIcon from '../../assets/selectIcon.png';
 import { UserContext } from '../../contexts/UserContext';
-import Spinner from '../../components/Spinner/Spinner';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAccount, usePrepareContractWrite, useContractWrite } from 'wagmi'
+import { useAccount, usePrepareContractWrite, useContractWrite, useSigner } from 'wagmi'
 import DashboardContent from '../../data/DashboardContent';
 import Lock from "../../abi/Unlock.json"
 import {ethers} from 'ethers';
+import axios from 'axios'
 const Dashboard = () => {
+	const {authToken,setAuthToken}=useContext(UserContext);
 	const { address, isConnected } = useAccount();
 	const navigate = useNavigate();
 	const { config } = usePrepareContractWrite({
@@ -43,8 +44,44 @@ const { data, isLoading, isSuccess, write } = useContractWrite({
 
 	// const { impactScore } = useContext(UserContext)
 	console.log(useContext(UserContext))
+	const signer = useSigner();
+	const signInWithEthereum = async () => {
+		
+		const endpoint = "https://api-mumbai.lens.dev";
+	const headers = {
+	"content-type": "application/json",
+    "Authorization": "<token>"
+	};
+	const challengeQuery = {
+    "operationName": "fetchAuthor",
+	
+    "query": `query Challenge {
+  challenge(request: { address: "${address}" }) {
+    text
+  }
+}`,
+    "variables": {}
+};
 
-
+	const response = await axios({
+  url: endpoint,
+  method: 'post',
+  headers: headers,
+  data: challengeQuery
+	});
+	const headers2 = {
+		"content-type": "application/json",
+		"Authorization": response.data,
+		};
+		console.log('response.data :>> ', response.data);
+		/**const response2=await axios({
+			url:endpoint,
+			method:'post',
+			headers:headers2,
+			data:graphqlQuery
+		})**/
+	}
+	signInWithEthereum();
 	return (
 		<div className={style.Dashboard}>
 			<div className={style.ImpactScoreContainer}>

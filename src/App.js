@@ -29,6 +29,7 @@ const App = () => {
 	const [walletAddress, setWalletAddress] = useState(null)
 	const [isLoggedIn, setLoggedIn] = useState(false)
 	const [mNonce,setMNonce]=useState("");
+	const [authToken,setAuthToken]=useState();
 	// const [impactScore, setImpactScore] = useState(80)
 
 	if (ethereum === undefined) {
@@ -45,6 +46,8 @@ const App = () => {
 							setLoggedIn,
 							mNonce,
 							setMNonce,
+							authToken,
+							setAuthToken,
 						}}>
 
 							<NavBar />
