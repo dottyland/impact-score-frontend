@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './Privacy.module.css';
 import NFTImage from '../../assets/NFT-test.png'
 import CTAButtton from '../../components/CTAButton/CTAButton';
@@ -9,7 +9,7 @@ import {useContractWrite, usePrepareContractWrite } from 'wagmi';
 import Hook from "../../abi/Hook.json";
 import {ethers} from 'ethers';
 const Privacy = () => {
-	const [val,setVal]=(false)
+	const [val,setVal]=useState(false)
 	const togglePrivacy=(val)=>{
 		setVal(val)
 		write();
