@@ -6,13 +6,29 @@ import ImpactScore from '../../components/ImpactScore/ImpactScore';
 import { UserContext } from '../../contexts/UserContext';
 import Spinner from '../../components/Spinner/Spinner';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import { useAccount, usePrepareContractWrite, useContractWrite } from 'wagmi'
 import DashboardContent from '../../data/DashboardContent';
-
+import Lock from "../../abi/Unlock.json"
 
 const Dashboard = () => {
 	const { address, isConnected } = useAccount();
 	const navigate = useNavigate();
+	const { config } = usePrepareContractWrite({
+		addressOrName: '0xecb504d39723b0be0e3a9aa33d646642d1051ee1',
+		contractInterface: Lock,
+		functionName: 'purchase',
+		args:[[0],[address],["0x0000000000000000000000000000000000000000"],[address],[]]
+		
+	  })
+const { data, isLoading, isSuccess, write } = useContractWrite({
+		...config,
+		onSuccess(cancelData, variables, context) {
+			console.log("Success!", cancelData,variables,context);
+		  },
+		  onError(error){
+			console.log('error :>> ', error);
+		  }
+})
 
 	const goToHome = () => {
 		navigate('/home')
@@ -36,11 +52,11 @@ const Dashboard = () => {
 			<div className={style.DashboardButtons}>
 				{/* <CTAButton buttonText='Share to lens' click={() => 'hi'} /> */}
 
-				<Link to='/NFT'>
+				
 					<CTAButton
 						buttonText='Impact NFT'
-						click={() => 'Impact NFT'} />
-				</Link>
+						click={() => {write()}} />
+				
 			</div>
 
 			<ExplanationBox
