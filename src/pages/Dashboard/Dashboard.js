@@ -16,7 +16,7 @@ const Dashboard = () => {
 	const { address, isConnected } = useAccount();
 	const navigate = useNavigate();
 	const { config } = usePrepareContractWrite({
-		addressOrName: '0x8b88392F7D1C8e26eb7C5F2cbe0aEbDB239980Ce',
+		addressOrName: '0x7291EBbf2633b6816545Ae33BA5795da3b0E983B',
 		contractInterface: Lock,
 		functionName: 'purchase',
 		args:[[ethers.BigNumber.from(0)],[address],["0x0000000000000000000000000000000000000000"],[address],["0x0000000000000000000000000000000000000000"]],
