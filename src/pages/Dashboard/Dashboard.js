@@ -48,31 +48,16 @@ const { data, isLoading, isSuccess, write } = useContractWrite({
 	const signInWithEthereum = async () => {
 		
 		const endpoint = "https://api-mumbai.lens.dev";
-	const headers = {
-	"content-type": "application/json",
-    "Authorization": "<token>"
-	};
-	const challengeQuery = {
-    "operationName": "fetchAuthor",
-	
-    "query": `query Challenge {
+	const challengeQuery =`query Challenge {
   challenge(request: { address: "${address}" }) {
     text
   }
-}`,
-    "variables": {}
-};
+}`;
 
-	const response = await axios({
-  url: endpoint,
-  method: 'post',
-  headers: headers,
-  data: challengeQuery
+	const response = await axios( endpoint,{
+  query: challengeQuery
 	});
-	const headers2 = {
-		"content-type": "application/json",
-		"Authorization": response.data,
-		};
+	
 		console.log('response.data :>> ', response.data);
 		/**const response2=await axios({
 			url:endpoint,
