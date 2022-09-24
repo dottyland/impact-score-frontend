@@ -9,23 +9,28 @@ import calculateImage from '../../assets/calculate.svg';
 import scanImage from '../../assets/scan.svg';
 import authenticateImage from '../../assets/authentication.svg';
 import { UserContext } from '../../contexts/UserContext';
-import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import { useAccount, useConnect, useDisconnect, useSigner, useSignMessage } from 'wagmi'
 import { Link, useNavigate } from 'react-router-dom';
 import Spinner from '../../components/Spinner/Spinner';
 
 const domain = window.location.host;
 const origin = window.location.origin;
-const API_URL = 'https://impact-api.vercel.app'
+const API_URL = 'http://localhost:5000'
 
-const createSiweMessage = (address, statement) => {
-	const message = new SiweMessage({
+const createSiweMessage = async (address, statement) => {
+
+	const res = await fetch(`${API_URL}/nonce`,{credentials:"include"});
+	console.log('res :>> ', res.body);
+	console.log('origin :>> ', origin);
+    const message = new SiweMessage({
 		domain,
-		address,
-		statement,
-		uri: origin,
-		version: '1',
-		chainId: '1'
-	});
+        address,
+        statement,
+		uri:origin,
+        version: '1',
+        chainId: '1',
+        nonce: await res.text()
+    });
 	return message.prepareMessage();
 }
 
@@ -35,6 +40,8 @@ const AuthPage = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const { walletAddress, impactScore, setImpactScore } = useContext(UserContext);
 	const { address, isConnected } = useAccount();
+	const {data:wsigner} = useSigner();
+	const {data, signMessageAsync } = useSignMessage();
 
 	const goToDashboard = () => {
 		navigate('/dashboard')
@@ -45,24 +52,32 @@ const AuthPage = () => {
 	}
 
 	const signInWithEthereum = async () => {
-		const provider = new ethers.providers.Web3Provider(window.ethereum);
-		const signer = provider.getSigner();
+		const res2 = await fetch(`${API_URL}/api/calculate`,{credentials:"include"});
+		console.log('re :>> ', await res2.json());
+		const signer = wsigner;
+		console.log('object :>> ', signer.getAddress());
 		setIsLoading(true);
-		const message = createSiweMessage(
+		console.log("1");
+		const message = await createSiweMessage(
 			await signer.getAddress(),
 			'Sign in with Ethereum to the app.'
 		);
-		const signature = await signer.signMessage(message);
-		console.log(message);
+		console.log("2");
+		const signature = await signMessageAsync({message});
+		console.log("a",message);
+		console.log("b",signature);
+		const res = await fetch(`${API_URL}/verify`,{
+			method: "POST",
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({message:message,signature:signature }),
+			credentials:'include'
+		});
+		console.log(res);
+		
 
-		signature = await signer.signMessage(message);
-		console.log(signature);
-
-		const res = await axios.post(`${API_URL}/verify`, {
-			body: JSON.stringify({ message, signature }),
-		}).then(
-			() => console.log('running' + res)
-		)
+		/**/
 	}
 
 	useEffect(() => {
