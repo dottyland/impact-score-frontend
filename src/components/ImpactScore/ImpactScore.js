@@ -28,9 +28,9 @@ const ImpactScore = ({ value, maxValue }) => {
 			});
 			if(res2.status===200)
 				{
-					console.log("object",res2,res2.json());
-
-					setScore(await res2.json().score);
+					console.log("object",res2);
+					let data=await res2.json();
+					setScore( data.score);
 				}
 			else
 			{
