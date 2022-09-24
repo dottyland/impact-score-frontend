@@ -7,18 +7,18 @@ import ExplanationBox from '../../containers/ExplanationBox/ExplanationBox';
 import PrivacyContent from '../../data/PrivacyContent';
 import {useContractWrite, usePrepareContractWrite } from 'wagmi';
 import Hook from "../../abi/Hook.json";
-import {ethers} from 'ethers';
+
 const Privacy = () => {
 	const [val,setVal]=useState(false)
-	const togglePrivacy=(val)=>{
-		setVal(val)
+	const togglePrivacy=async (val)=>{
+		await setVal(val)
 		write();
 	}
 	const { config } = usePrepareContractWrite({
 			addressOrName: '0x28F1f723CE0b469f241393804d1aC65106D96a8A',
 			contractInterface: Hook,
 			functionName: 'setPrivacy',
-			args:val
+			args:val?true:false,
 			
 		  })
 	const { data, isLoading, isSuccess, write } = useContractWrite({
