@@ -1,16 +1,16 @@
 
 import React, { useEffect, useState } from 'react';
-import { gql, HttpLink,ApolloLink,concat } from '@apollo/client';
-import { createHttpLink } from '@apollo/client';
+import { gql } from '@apollo/client';
+
 import style from './NFTPage.module.css';
 import { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
-import NFTImage from '../../assets/NFTImage.png'
+
 import CTAButtton from '../../components/CTAButton/CTAButton';
-import ExplanationBox from '../../containers/ExplanationBox/ExplanationBox';
+
 import { useAccount, useProvider,useSignMessage } from 'wagmi'
 import { Link } from 'react-router-dom';
-import NFTContent from '../../data/NFTContent';
+
 import { apolloClient } from '../../components/apollo-client';//
 import Lock from '../../abi/Unlock.json'
 import {ethers} from 'ethers'
@@ -19,9 +19,6 @@ import twitterIcon from '../../assets/bi_twitter.svg';
 import shareIcon from '../../assets/share_lens.svg';
 import eyeIcon from '../../assets/eyeIcon.svg';
 import {Buffer} from 'buffer';
-import { ApolloClient, InMemoryCache } from '@apollo/client';
-
-const APIURL = 'https://api-mumbai.lens.dev/';
 
 
 
@@ -128,14 +125,11 @@ const NFTPage = () => {
 		  }`
 		const createProfile=await apolloClient.mutate({
 			mutation:gql(qCreateProfile),
-			options: { 
 				context: { 
 				  headers: { 
-					"x-access-token": authToken  // this header will reach the server
+					"x-access-token": authToken,  // this header will reach the server
 				  } 
 				},
-				// ... other options  
-			  }
 		  })
 		  console.log('object :>> ', createProfile);
 		  const qProfile=`query DefaultProfile {
