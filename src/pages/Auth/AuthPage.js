@@ -24,7 +24,6 @@ const API_URL = 'https://impact-api-bepw.vercel.app'
 
 const AuthPage = () => {
 	const navigate = useNavigate();
-	const [disabled,setDisabled]=useState(false)
 	const [messageSigned, setmessageSigned] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const { mNonce, setMNonce } = useContext(UserContext);
@@ -86,7 +85,7 @@ const AuthPage = () => {
 
 	}
 
-	const AuthCalculate = ({disabled}) => {
+	const AuthCalculate = () => {
 		return (
 			<div className={style.AuthPage}>
 				<h1 className={style.PageTitle}>
@@ -104,13 +103,13 @@ const AuthPage = () => {
 					</span>
 				</div>
 
-				{!disabled&&(<CTAButton
+				<CTAButton
 					buttonIcon={calculateIcon}
 					buttonText='Calculate Score'
 					click={() => {
 						goToDashboard()
 					}}
-				/>)}
+				/>
 			</div>
 		)
 	}
@@ -148,7 +147,7 @@ const AuthPage = () => {
 				{/* go to dashboard */}
 				{/* </button> */}
 			</div>
-			: <AuthCalculate disabled={disabled}/>
+			: <AuthCalculate />
 
 	)
 }
