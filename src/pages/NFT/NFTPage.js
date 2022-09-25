@@ -244,13 +244,13 @@ const NFTPage = () => {
 			createPostTypedData(request: {
 			  profileId: "${fetchProfile.data.profile.id}",
 			  contentURI: "${lUrl}",
-			  "collectModule": {
-				"freeCollectModule":  {
-					"followerOnly": true
+			  collectModule: {
+				freeCollectModule:  {
+					followerOnly: true
 				 }
 			},
 			referenceModule: {
-				"followerOnlyReferenceModule": false
+				followerOnlyReferenceModule: false
 			}
 			}) {
 			  id
