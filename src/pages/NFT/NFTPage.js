@@ -43,7 +43,10 @@ const NFTPage = () => {
 		const data= await contract.tokenURI(tokenId);
 		console.log('data :>> ', data);
 		const buf=Buffer.from(data.substring(29),'base64')
-		console.log('window.btoa() :>> ',buf );
+		console.log('window.btoa() :>> ',buf.toString('ascii') );
+		const jso=await buf.toString('ascii').json();
+		console.log('jso :>> ', jso);
+		console.log(',buf.toJSON() :>> ', buf.toJSON());
 		const Data= await fetch(data);
 		const jData=await Data.json();
 		console.log('jData :>> ', jData);
