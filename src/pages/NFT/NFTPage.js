@@ -287,7 +287,7 @@ const NFTPage = () => {
 		
 		<div className={style.NFTPage}>
 			<div className={style.NFTDetails}>
-				<img src={nftData?.image_data} alt="AV" className={style.NFTImage} />
+				<img src={imageData?imageData:undefined} alt="AV" className={style.NFTImage} />
 				<span className={style.PageTitle}>Congratulations, you are Impact Self #{id}!</span>
 				{nftData&&(<span className={style.PageTitle}>{nftData.attributes?.[0].score}</span>)}
 				<div className={style.ButtonsContainer}>
