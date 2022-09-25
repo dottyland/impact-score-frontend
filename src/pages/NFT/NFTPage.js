@@ -273,7 +273,7 @@ const NFTPage = () => {
 				},
 		  })
 		  console.log('createP :>> ', createP);
-		  console.log('NFTData :>> ', createP.data.createPostTypedData.value.contentURI);
+		  console.log('NFTData :>> ', createP.data.createPostTypedData.typedData.value.contentURI);
 	}
 	return (
 		
