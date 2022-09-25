@@ -131,7 +131,7 @@ const NFTPage = () => {
 		
 		const qCreateProfile=`mutation CreateProfile {
 			createProfile(request:{ 
-						  handle: "madmax11111111111122221",
+						  handle: "madmax11111111111122221323",
 						  profilePictureUri: null,
 						  followNFTURI: null,
 						  followModule: null
@@ -155,7 +155,7 @@ const NFTPage = () => {
 		  })
 		  console.log('object :>> ', createProfile);
 		  const qProfile=`query Profile {
-			profile(request: { handle: "madmax11111111111122221.test" }) {
+			profile(request: { handle: "madmax11111111111122221323.test" }) {
 			  id
 			  name
 			  bio
@@ -302,11 +302,11 @@ const NFTPage = () => {
 				<div className={style.ButtonsContainer}>
 					<CTAButtton
 						buttonIcon={shareIcon}
-						buttonText='Share on lens'
+						buttonText='Create Lens'
 						click = {queryExample} />
 					<CTAButtton
 						buttonIcon={shareIcon}
-						buttonText='Create Lens'
+						buttonText='Share on Lens'
 						click = {p2} />
 					<a href="https://twitter.com/intent/tweet?text=I%20just%20claimed%20my%20Impact%20Self!%20Jealous?%20Join%20me%20in%20saving%20the%20🌍%20with%20@dottyland_xyz!">
 						<CTAButtton
