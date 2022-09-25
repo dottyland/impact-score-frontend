@@ -17,7 +17,7 @@ import {ethers} from 'ethers'
 import twitterIcon from '../../assets/bi_twitter.svg';
 import shareIcon from '../../assets/share_lens.svg';
 import eyeIcon from '../../assets/eyeIcon.svg';
-
+import {Buffer} from 'buffer';
 
 
 const NFTPage = () => {
