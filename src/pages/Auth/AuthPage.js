@@ -8,6 +8,9 @@ import CTAButton from '../../components/CTAButton/CTAButton';
 import calculateImage from '../../assets/calculate.svg';
 import scanImage from '../../assets/scan.svg';
 import authenticateImage from '../../assets/authentication.svg';
+import signatureIcon from '../../assets/signatureIcon.png';
+import calculateIcon from '../../assets/calculateIcon.png';
+
 import { UserContext } from '../../contexts/UserContext';
 import { useAccount, useConnect, useDisconnect, useSigner, useSignMessage } from 'wagmi'
 import { Link, useNavigate } from 'react-router-dom';
@@ -20,11 +23,10 @@ const API_URL = 'https://impact-api.vercel.app'
 
 
 const AuthPage = () => {
-	let mNonce = "";
 	const navigate = useNavigate();
 	const [messageSigned, setmessageSigned] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-	const { walletAddress, impactScore, setImpactScore } = useContext(UserContext);
+	const { mNonce, setMNonce } = useContext(UserContext);
 	const { address, isConnected } = useAccount();
 	const { data: wsigner } = useSigner();
 	const { data, signMessageAsync } = useSignMessage();
@@ -44,7 +46,7 @@ const AuthPage = () => {
 			chainId: '1',
 			nonce: temp
 		});
-		mNonce = temp;
+		setMNonce(temp);
 		return message.prepareMessage();
 	}
 
@@ -80,33 +82,30 @@ const AuthPage = () => {
 			credentials: 'include'
 		});
 		console.log(res);
-		const res2 = await fetch(`${API_URL}/api/calculate`, {
-			method: "POST",
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				address: await signer.getAddress(),
-				nonce: mNonce
-			}),
-			credentials: "include"
-		});
 
-		/**/
-		console.log('res2.json() :>> ', res2.json());
 	}
 
 	const AuthCalculate = () => {
 		return (
 			<div className={style.AuthPage}>
-				<h1>
+				<h1 className={style.PageTitle}>
 					What’s my Impact Score?
 				</h1>
-				<AuthBanner icon={authenticateImage} text={
-					`Scientists estimate that to avoid the worst effects of climate change, we need to cap global warming at 1.5°C. Based on a study by Oxfam and the Institute for European Environmental Policy, this requires average individual emissions to be less than 2.3tCO2/year. In the US, the average individual emits more than 14 tCO2 per year.                                           One way to help lower your emissions level is to offset your current emissions. So if you're retiring more than 11.7 CO2 tons per year, you're participating in avoiding the worst effects of global warming. Each token retired will contribute as points to improve your impact score.`
-				} />
 
-				<CTAButton buttonText='Calculate Score'
+				<div className={style.AuthCalculateBanner}>
+					<img src={authenticateImage} alt="" />
+					<span>
+						Scientists estimate that to avoid the worst effects of climate change, we need to cap global warming at 1.5°C.
+						<p></p>
+						Based on a study by Oxfam and the Institute for European Environmental Policy, this requires average individual emissions to be less than 2.3tCO2/year. In the US, the average individual emits more than 14 tCO2 per year.
+						<p></p>
+						One way to help lower your emissions level is to offset your current emissions. So if you're retiring more than 11.7 CO2 tons per year, you're participating in avoiding the worst effects of global warming. Each token retired will contribute as points to improve your impact score.
+					</span>
+				</div>
+
+				<CTAButton
+					buttonIcon={calculateIcon}
+					buttonText='Calculate Score'
 					click={() => {
 						goToDashboard()
 					}}
@@ -134,16 +133,19 @@ const AuthPage = () => {
 				} />
 
 				{
-					isLoading ? <Spinner /> : <CTAButton buttonText='Sign message'
-						click={() => {
-							signInWithEthereum()
-						}}
-					/>
+					isLoading ? <Spinner /> :
+						<CTAButton
+							buttonIcon={signatureIcon}
+							buttonText='Sign message'
+							click={() => {
+								signInWithEthereum()
+							}}
+						/>
 				}
 
-				<button onClick={goToDashboard}>
-					go to dashboard
-				</button>
+				{/* <button onClick={goToDashboard}> */}
+				{/* go to dashboard */}
+				{/* </button> */}
 			</div>
 			: <AuthCalculate />
 

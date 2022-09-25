@@ -8,6 +8,7 @@ import NFTs from './pages/NFT/NFTs';
 import Privacy from './pages/Privacy/Privacy';
 import { UserContext } from './contexts/UserContext';
 import { WagmiConfig, createClient } from 'wagmi';
+import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit';
 import { getDefaultProvider } from 'ethers';
 import {
 	BrowserRouter as Router,
@@ -28,7 +29,10 @@ const client = createClient({
 const App = () => {
 	const [walletAddress, setWalletAddress] = useState(null)
 	const [isLoggedIn, setLoggedIn] = useState(false)
-	const [impactScore, setImpactScore] = useState(80)
+	const [mNonce,setMNonce]=useState("");
+	const [authToken,setAuthToken]=useState();
+	const [refreshToken,setRefreshToken]=useState();
+	// const [impactScore, setImpactScore] = useState(80)
 
 	if (ethereum === undefined) {
 		alert('get metamask!')
@@ -42,8 +46,12 @@ const App = () => {
 							setWalletAddress,
 							isLoggedIn,
 							setLoggedIn,
-							impactScore,
-							setImpactScore
+							mNonce,
+							setMNonce,
+							authToken,
+							setAuthToken,
+							refreshToken,
+							setRefreshToken,
 						}}>
 
 							<NavBar />
