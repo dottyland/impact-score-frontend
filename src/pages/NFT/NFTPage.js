@@ -38,6 +38,7 @@ const NFTPage = () => {
 		setId(res.toString())
 	}
 	const tokenUri=async()=>{
+		//		
 		const tokenId=ethers.BigNumber.from(id);
 		const data= await contract.tokenURI(tokenId);
 		console.log('data :>> ', data);
