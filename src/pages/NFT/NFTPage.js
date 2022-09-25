@@ -26,6 +26,7 @@ import {Buffer} from 'buffer';
 
 const NFTPage = () => {
 	
+	const [imageData,setImageData]=useState();
 	const provider=useProvider();
 	const {authToken,setAuthToken,refreshToken,setRefreshToken}=useContext(UserContext);
 	console.log('apolloClient :>> ', apolloClient);
@@ -68,6 +69,8 @@ const NFTPage = () => {
 		const url=prefix+recode;
 		const Data= await fetch(data);
 		const jData=await Data.json();
+		const image=await fetch(jData.image_data)
+		setImageData(image);
 		setNftData(jData);
 		setLData(metadata);
 		setlUrl(link)
