@@ -26,7 +26,6 @@ import {Buffer} from 'buffer';
 
 const NFTPage = () => {
 	
-	const [imageData,setImageData]=useState();
 	const provider=useProvider();
 	const {authToken,setAuthToken,refreshToken,setRefreshToken}=useContext(UserContext);
 	console.log('apolloClient :>> ', apolloClient);
@@ -69,15 +68,6 @@ const NFTPage = () => {
 		const url=prefix+recode;
 		const Data= await fetch(data);
 		const jData=await Data.json();
-		const feed=await fetch(jData.image_data).then(response => response.blob())
-		.then(imageBlob => {
-			// Then create a local URL for that image and print it 
-			const imageObjectURL = URL.createObjectURL(imageBlob);
-			console.log(imageObjectURL);
-			return imageObjectURL
-		});
-		console.log('image :>> ', feed);
-		setImageData(feed);
 		setNftData(jData);
 		setLData(metadata);
 		setlUrl(link)
@@ -294,7 +284,7 @@ const NFTPage = () => {
 		
 		<div className={style.NFTPage}>
 			<div className={style.NFTDetails}>
-				<img src={imageData?imageData:undefined} alt="AV" className={style.NFTImage} />
+				<img src={nftData?.image_data} alt="AV" className={style.NFTImage} />
 				<span className={style.PageTitle}>Congratulations, you are Impact Self #{id}!</span>
 				{nftData&&(<span className={style.PageTitle}>{nftData.attributes?.[0].score}</span>)}
 				<div className={style.ButtonsContainer}>
