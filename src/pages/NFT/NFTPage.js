@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
-import { gql } from '@apollo/client';
+import { gql, HttpLink,ApolloLink,concat } from '@apollo/client';
+import { createHttpLink } from '@apollo/client';
 import style from './NFTPage.module.css';
 import { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
@@ -10,7 +11,7 @@ import ExplanationBox from '../../containers/ExplanationBox/ExplanationBox';
 import { useAccount, useProvider,useSignMessage } from 'wagmi'
 import { Link } from 'react-router-dom';
 import NFTContent from '../../data/NFTContent';
-import { apolloClient } from '../../components/apollo-client';
+import { apolloClient } from '../../components/apollo-client';//
 import Lock from '../../abi/Unlock.json'
 import {ethers} from 'ethers'
 
@@ -18,12 +19,35 @@ import twitterIcon from '../../assets/bi_twitter.svg';
 import shareIcon from '../../assets/share_lens.svg';
 import eyeIcon from '../../assets/eyeIcon.svg';
 import {Buffer} from 'buffer';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+
+const APIURL = 'https://api-mumbai.lens.dev/';
+
+
+
 
 
 const NFTPage = () => {
+	
+	
+	const httpLink=new HttpLink({uri:APIURL});
+	
 	const provider=useProvider();
 	const {authToken,setAuthToken,refreshToken,setRefreshToken}=useContext(UserContext);
-	
+	const authMiddleware = new ApolloLink((operation, forward) => {
+			// add the authorization to the headers
+			operation.setContext({
+			headers: {
+				'x-access-token': authToken ? `${authToken}` : "",
+			},
+			});
+			return forward(operation);
+		});
+	const apolloClient= new ApolloClient({
+  	uri: authToken?concat(authMiddleware,httpLink):APIURL,
+  	cache: new InMemoryCache(),
+	});
+	console.log('apolloClient :>> ', apolloClient);
 	const { signMessageAsync } = useSignMessage();
 	const {address}=useAccount();
 	const [nftData,setNftData]=useState({});
@@ -94,119 +118,123 @@ const NFTPage = () => {
 	   const login= await apolloClient.mutate({
 		mutation: gql(qLogin),
 	  })
-	  const qCreateProfile=`mutation CreateProfile {
-		createProfile(request:{ 
-					  handle: "madmax",
-					  profilePictureUri: null,
-					  followNFTURI: null,
-					  followModule: null
-					  }) {
-		  ... on RelayerResult {
-			txHash
-		  }
-		  ... on RelayError {
-			reason
-		  }
-		  __typename
-		}
-	  }`
+	 
 	  console.log('Lens example data: ', response,login)
-	  const qProfile=`query DefaultProfile {
-		defaultProfile(request: { ethereumAddress: "${address}"}) {
-		  id
-		  name
-		  bio
-		  isDefault
-		  attributes {
-			displayType
-			traitType
-			key
-			value
-		  }
-		  followNftAddress
-		  metadata
-		  handle
-		  picture {
-			... on NftImage {
-			  contractAddress
-			  tokenId
-			  uri
-			  chainId
-			  verified
-			}
-			... on MediaSet {
-			  original {
-				url
-				mimeType
-			  }
-			}
-		  }
-		  coverPicture {
-			... on NftImage {
-			  contractAddress
-			  tokenId
-			  uri
-			  chainId
-			  verified
-			}
-			... on MediaSet {
-			  original {
-				url
-				mimeType
-			  }
-			}
-		  }
-		  ownedBy
-		  dispatcher {
-			address
-			canUseRelay
-		  }
-		  stats {
-			totalFollowers
-			totalFollowing
-			totalPosts
-			totalComments
-			totalMirrors
-			totalPublications
-			totalCollects
-		  }
-		  followModule {
-			... on FeeFollowModuleSettings {
-			  type
-			  contractAddress
-			  amount {
-				asset {
-				  name
-				  symbol
-				  decimals
-				  address
-				}
-				value
-			  }
-			  recipient
-			}
-			... on ProfileFollowModuleSettings {
-			 type
-			}
-			... on RevertFollowModuleSettings {
-			 type
-			}
-		  }
-		}
-	  }`
-		  const createProfile=await apolloClient.mutate({
-			headers:{
-				"x-access-token":login.data.authenticate.accessToken,
-			},
-			mutation:gql(qCreateProfile),
-		  })
-		  console.log('fetchProfile :>> ', createProfile);
-		  const fetchProfile=await apolloClient.query({
-			query:gql(qProfile),
-		  })
-		  console.log('fetchProfile2 :>> ', fetchProfile);
+	  
 	  setAuthToken(login.data.authenticate.accessToken)
 	  setRefreshToken(login.data.authenticate.refreshToken)
+	}
+	const p2=async()=>{
+		
+		const qCreateProfile=`mutation CreateProfile {
+			createProfile(request:{ 
+						  handle: "madmax",
+						  profilePictureUri: null,
+						  followNFTURI: null,
+						  followModule: null
+						  }) {
+			  ... on RelayerResult {
+				txHash
+			  }
+			  ... on RelayError {
+				reason
+			  }
+			  __typename
+			}
+		  }`
+		const createProfile=await apolloClient.mutate({
+			mutation:gql(qCreateProfile),
+		  })
+		  console.log('object :>> ', createProfile);
+		  const qProfile=`query DefaultProfile {
+			defaultProfile(request: { ethereumAddress: "${address}"}) {
+			  id
+			  name
+			  bio
+			  isDefault
+			  attributes {
+				displayType
+				traitType
+				key
+				value
+			  }
+			  followNftAddress
+			  metadata
+			  handle
+			  picture {
+				... on NftImage {
+				  contractAddress
+				  tokenId
+				  uri
+				  chainId
+				  verified
+				}
+				... on MediaSet {
+				  original {
+					url
+					mimeType
+				  }
+				}
+			  }
+			  coverPicture {
+				... on NftImage {
+				  contractAddress
+				  tokenId
+				  uri
+				  chainId
+				  verified
+				}
+				... on MediaSet {
+				  original {
+					url
+					mimeType
+				  }
+				}
+			  }
+			  ownedBy
+			  dispatcher {
+				address
+				canUseRelay
+			  }
+			  stats {
+				totalFollowers
+				totalFollowing
+				totalPosts
+				totalComments
+				totalMirrors
+				totalPublications
+				totalCollects
+			  }
+			  followModule {
+				... on FeeFollowModuleSettings {
+				  type
+				  contractAddress
+				  amount {
+					asset {
+					  name
+					  symbol
+					  decimals
+					  address
+					}
+					value
+				  }
+				  recipient
+				}
+				... on ProfileFollowModuleSettings {
+				 type
+				}
+				... on RevertFollowModuleSettings {
+				 type
+				}
+			  }
+			}
+		  }`
+		  
+			  const fetchProfile=await apolloClient.query({
+				query:gql(qProfile),
+			  })
+			  console.log('fetchProfile2 :>> ', fetchProfile);
+
 	}
 	return (
 		
@@ -220,7 +248,10 @@ const NFTPage = () => {
 						buttonIcon={shareIcon}
 						buttonText='Share on lens'
 						click = {queryExample} />
-	
+					<CTAButtton
+						buttonIcon={shareIcon}
+						buttonText='Create Lens'
+						click = {p2} />
 					<a href="https://twitter.com/intent/tweet?text=I%20just%20claimed%20my%20Impact%20Self!%20Jealous?%20Join%20me%20in%20saving%20the%20🌍%20with%20@dottyland_xyz!">
 						<CTAButtton
 							buttonIcon={twitterIcon}
