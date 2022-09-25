@@ -132,12 +132,11 @@ const NFTPage = () => {
 				},
 		  })
 		  console.log('object :>> ', createProfile);
-		  const qProfile=`query DefaultProfile {
-			defaultProfile(request: { ethereumAddress: "${address}"}) {
+		  const qProfile=`query Profile {
+			profile(request: { handle: "madmax11111111111122221" }) {
 			  id
 			  name
 			  bio
-			  isDefault
 			  attributes {
 				displayType
 				traitType
@@ -146,13 +145,12 @@ const NFTPage = () => {
 			  }
 			  followNftAddress
 			  metadata
-			  handle
+			  isDefault
 			  picture {
 				... on NftImage {
 				  contractAddress
 				  tokenId
 				  uri
-				  chainId
 				  verified
 				}
 				... on MediaSet {
@@ -161,13 +159,14 @@ const NFTPage = () => {
 					mimeType
 				  }
 				}
+				__typename
 			  }
+			  handle
 			  coverPicture {
 				... on NftImage {
 				  contractAddress
 				  tokenId
 				  uri
-				  chainId
 				  verified
 				}
 				... on MediaSet {
@@ -176,6 +175,7 @@ const NFTPage = () => {
 					mimeType
 				  }
 				}
+				__typename
 			  }
 			  ownedBy
 			  dispatcher {
@@ -194,11 +194,10 @@ const NFTPage = () => {
 			  followModule {
 				... on FeeFollowModuleSettings {
 				  type
-				  contractAddress
 				  amount {
 					asset {
-					  name
 					  symbol
+					  name
 					  decimals
 					  address
 					}
@@ -207,10 +206,10 @@ const NFTPage = () => {
 				  recipient
 				}
 				... on ProfileFollowModuleSettings {
-				 type
+				  type
 				}
 				... on RevertFollowModuleSettings {
-				 type
+				  type
 				}
 			  }
 			}
