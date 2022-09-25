@@ -24,7 +24,7 @@ const Privacy = () => {
 	
 	const [val,setVal]=useState(false)
 	const { config } = usePrepareContractWrite({
-			addressOrName: '0xFAE051ED73343A579CeF95206ABF37B603FeFdEc',
+			addressOrName: '0xF666B31F561a5D4B46D1eDeDFea3cAD2163C62d2',
 			contractInterface: Hook,
 			functionName: 'setPrivacy',
 			args:[isPrivate],
