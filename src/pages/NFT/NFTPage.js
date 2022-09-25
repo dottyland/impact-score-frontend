@@ -243,13 +243,15 @@ const NFTPage = () => {
 		const mPost=`mutation CreatePostTypedData {
 			createPostTypedData(request: {
 			  profileId: "${fetchProfile.data.profile.id}",
-			  contentURI: "ipfs://QmPogtffEF3oAbKERsoR4Ky8aTvLgBF5totp5AuF8YN6vl",
-			  collectModule: {
-				revertCollectModule: tru
-			  },
-			  referenceModule: {
-				followerOnlyReferenceModule: false
-			  }
+			  contentURI: "${lUrl}",
+			  "collectModule": {
+				"freeCollectModule":  {
+					"followerOnly": true
+				 }
+			},
+			referenceModule: {
+				"followerOnlyReferenceModule": false
+			}
 			}) {
 			  id
 			  expiresAt
@@ -279,7 +281,15 @@ const NFTPage = () => {
 			  }
 			}
 		  }`
-
+		  const createP=await apolloClient.mutate({
+			mutation:gql(mPost),
+				context: { 
+				  headers: { 
+					"x-access-token": authToken,  // this header will reach the server
+				  } 
+				},
+		  })
+		  console.log('createP :>> ', mPost,createP);
 	}
 	return (
 		
