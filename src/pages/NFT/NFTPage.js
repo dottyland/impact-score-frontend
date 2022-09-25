@@ -59,7 +59,7 @@ const NFTPage = () => {
 		console.log('jso :>> ', jso);
 		console.log(',buf.toJSON() :>> ', buf.toJSON());
 		let metadata={};
-		const a=Date.now().toString
+		const a=Date.now().toString();
 		metadata.version="one";
 		metadata.metadata_id="madmaxo12312"+a;
 		metadata.media="XYZ";
