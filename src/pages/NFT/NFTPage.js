@@ -94,6 +94,22 @@ const NFTPage = () => {
 	   const login= await apolloClient.mutate({
 		mutation: gql(qLogin),
 	  })
+	  const qCreateProfile=`mutation CreateProfile {
+		createProfile(request:{ 
+					  handle: "devjoshstevens",
+					  profilePictureUri: null,
+					  followNFTURI: null,
+					  followModule: null
+					  }) {
+		  ... on RelayerResult {
+			txHash
+		  }
+		  ... on RelayError {
+			reason
+		  }
+		  __typename
+		}
+	  }`
 	  console.log('Lens example data: ', response,login)
 	  const qProfile=`query DefaultProfile {
 		defaultProfile(request: { ethereumAddress: "${address}"}) {
@@ -178,10 +194,10 @@ const NFTPage = () => {
 		  }
 		}
 	  }`
-		  const fetchProfile=await apolloClient.query({
-			query:gql(qProfile),
+		  const createProfile=await apolloClient.mutate({
+			mutation:gql(qCreateProfile),
 		  })
-		  console.log('fetchProfile :>> ', fetchProfile);
+		  console.log('fetchProfile :>> ', createProfile);
 	  setAuthToken(login.data.authenticate.accessToken)
 	  setRefreshToken(login.data.authenticate.refreshToken)
 	}
