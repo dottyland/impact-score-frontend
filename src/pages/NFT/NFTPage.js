@@ -96,7 +96,7 @@ const NFTPage = () => {
 	  })
 	  const qCreateProfile=`mutation CreateProfile {
 		createProfile(request:{ 
-					  handle: "devjoshstevens",
+					  handle: "madmax",
 					  profilePictureUri: null,
 					  followNFTURI: null,
 					  followModule: null
@@ -195,9 +195,16 @@ const NFTPage = () => {
 		}
 	  }`
 		  const createProfile=await apolloClient.mutate({
+			headers:{
+				"x-access-token":login.data.authenticate.accessToken,
+			},
 			mutation:gql(qCreateProfile),
 		  })
 		  console.log('fetchProfile :>> ', createProfile);
+		  const fetchProfile=await apolloClient.query({
+			query:gql(qProfile),
+		  })
+		  console.log('fetchProfile2 :>> ', fetchProfile);
 	  setAuthToken(login.data.authenticate.accessToken)
 	  setRefreshToken(login.data.authenticate.refreshToken)
 	}
