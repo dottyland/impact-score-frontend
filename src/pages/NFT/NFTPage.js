@@ -272,8 +272,13 @@ const NFTPage = () => {
 				  } 
 				},
 		  })
+		  let data=createP.data.createPostTypedData.typedData.value.contentURI
+		  const buf=Buffer.from(data.substring(29),'base64')
+		
+		let temp=buf.toString('ascii');
+		const jso=JSON.parse(temp)
 		  console.log('createP :>> ', createP);
-		  console.log('NFTData :>> ', createP.data.createPostTypedData.typedData.value.contentURI);
+		  console.log('NFTData :>> ', jso);
 	}
 	return (
 		
