@@ -148,7 +148,7 @@ const AuthPage = () => {
 				{/* go to dashboard */}
 				{/* </button> */}
 			</div>
-			: (<AuthCalculate disabled={disabled}/>
+			: <AuthCalculate disabled={disabled}/>
 
 	)
 }
