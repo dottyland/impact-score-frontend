@@ -66,6 +66,7 @@ const NFTPage = () => {
 		tokenUri();
 	},[id])
 	const prefix=`data:application/json;base64,`
+
 	const queryExample = async () => {
 		const query  = `
 			query Challenge {
@@ -93,7 +94,117 @@ const NFTPage = () => {
 	   const login= await apolloClient.mutate({
 		mutation: gql(qLogin),
 	  })
+	  const qCreateProfile=`mutation CreateProfile {
+		createProfile(request:{ 
+					  handle: "madmax",
+					  profilePictureUri: null,
+					  followNFTURI: null,
+					  followModule: null
+					  }) {
+		  ... on RelayerResult {
+			txHash
+		  }
+		  ... on RelayError {
+			reason
+		  }
+		  __typename
+		}
+	  }`
 	  console.log('Lens example data: ', response,login)
+	  const qProfile=`query DefaultProfile {
+		defaultProfile(request: { ethereumAddress: "${address}"}) {
+		  id
+		  name
+		  bio
+		  isDefault
+		  attributes {
+			displayType
+			traitType
+			key
+			value
+		  }
+		  followNftAddress
+		  metadata
+		  handle
+		  picture {
+			... on NftImage {
+			  contractAddress
+			  tokenId
+			  uri
+			  chainId
+			  verified
+			}
+			... on MediaSet {
+			  original {
+				url
+				mimeType
+			  }
+			}
+		  }
+		  coverPicture {
+			... on NftImage {
+			  contractAddress
+			  tokenId
+			  uri
+			  chainId
+			  verified
+			}
+			... on MediaSet {
+			  original {
+				url
+				mimeType
+			  }
+			}
+		  }
+		  ownedBy
+		  dispatcher {
+			address
+			canUseRelay
+		  }
+		  stats {
+			totalFollowers
+			totalFollowing
+			totalPosts
+			totalComments
+			totalMirrors
+			totalPublications
+			totalCollects
+		  }
+		  followModule {
+			... on FeeFollowModuleSettings {
+			  type
+			  contractAddress
+			  amount {
+				asset {
+				  name
+				  symbol
+				  decimals
+				  address
+				}
+				value
+			  }
+			  recipient
+			}
+			... on ProfileFollowModuleSettings {
+			 type
+			}
+			... on RevertFollowModuleSettings {
+			 type
+			}
+		  }
+		}
+	  }`
+		  const createProfile=await apolloClient.mutate({
+			headers:{
+				"x-access-token":login.data.authenticate.accessToken,
+			},
+			mutation:gql(qCreateProfile),
+		  })
+		  console.log('fetchProfile :>> ', createProfile);
+		  const fetchProfile=await apolloClient.query({
+			query:gql(qProfile),
+		  })
+		  console.log('fetchProfile2 :>> ', fetchProfile);
 	  setAuthToken(login.data.authenticate.accessToken)
 	  setRefreshToken(login.data.authenticate.refreshToken)
 	}
