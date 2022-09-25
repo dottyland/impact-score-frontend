@@ -18,7 +18,7 @@ import Spinner from '../../components/Spinner/Spinner';
 
 const domain = window.location.host;
 const origin = window.location.origin;
-const API_URL = 'https://impact-api.vercel.app'
+const API_URL = 'https://impact-api-bepw.vercel.app/'
 
 
 
