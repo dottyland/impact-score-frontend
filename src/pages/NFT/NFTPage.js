@@ -32,6 +32,10 @@ const NFTPage = () => {
 	const { signMessageAsync } = useSignMessage();
 	const {address}=useAccount();
 	const [nftData,setNftData]=useState({});
+	const [lUrl,setlUrl]=useState({});
+	const [lData,setLData]=useState({});
+	console.log('lData :>> ', lData);
+	console.log('lUrl :>> ', lUrl);
 	const [id,setId]=useState("-1")
 	const contract=new ethers.Contract("0x7291EBbf2633b6816545Ae33BA5795da3b0E983B",Lock,provider);
 	const getTokenId=async()=>{
@@ -54,14 +58,31 @@ const NFTPage = () => {
 		const jso=JSON.parse(temp)
 		console.log('jso :>> ', jso);
 		console.log(',buf.toJSON() :>> ', buf.toJSON());
+		let metadata={};
+		metadata.version="one";
+		metadata.metadata_id="madmaxo123123351235123213";
+		metadata.media="XYZ";
+		metadata.locale="en";
+		metadata.mainContentFocus="ARTICLE";
+		metadata.attributes=jso.attributes;
+		metadata.image=jso.image_data;
+		metadata.name=jso.name
+		metadata.imageMimeType="image/svg+xml"
+		console.log('metadata :>> ', metadata);
 		const strin=JSON.stringify(jso)
+		const lstrin=JSON.stringify(metadata);
+		const lcode= Buffer.from(lstrin).toString('base64');
+		const link=prefix+lcode;
 		const recode=Buffer.from(strin).toString('base64');
 		const url=prefix+recode;
 		console.log('url :>> ', url);
+		console.log('link :>> ', link);
 		const Data= await fetch(data);
 		const jData=await Data.json();
 		console.log('jData :>> ', jData);
 		setNftData(jData);
+		setLData(metadata);
+		setlUrl(link)
 	}
 	useEffect(()=>{
 		getTokenId();
@@ -219,6 +240,45 @@ const NFTPage = () => {
 				query:gql(qProfile),
 			  })
 			  console.log('fetchProfile2 :>> ', fetchProfile);
+		const mPost=`mutation CreatePostTypedData {
+			createPostTypedData(request: {
+			  profileId: "${fetchProfile.data.profile.id}",
+			  contentURI: "ipfs://QmPogtffEF3oAbKERsoR4Ky8aTvLgBF5totp5AuF8YN6vl",
+			  collectModule: {
+				revertCollectModule: tru
+			  },
+			  referenceModule: {
+				followerOnlyReferenceModule: false
+			  }
+			}) {
+			  id
+			  expiresAt
+			  typedData {
+				types {
+				  PostWithSig {
+					name
+					type
+				  }
+				}
+				domain {
+				  name
+				  chainId
+				  version
+				  verifyingContract
+				}
+				value {
+				  nonce
+				  deadline
+				  profileId
+				  contentURI
+				  collectModule
+				  collectModuleInitData
+				  referenceModule
+				  referenceModuleInitData
+				}
+			  }
+			}
+		  }`
 
 	}
 	return (
