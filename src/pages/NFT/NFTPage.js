@@ -109,7 +109,7 @@ const NFTPage = () => {
 		
 		const qCreateProfile=`mutation CreateProfile {
 			createProfile(request:{ 
-						  handle: "madmax",
+						  handle: "madmax11111111111122221",
 						  profilePictureUri: null,
 						  followNFTURI: null,
 						  followModule: null
