@@ -66,6 +66,7 @@ const NFTPage = () => {
 		tokenUri();
 	},[id])
 	const prefix=`data:application/json;base64,`
+
 	const queryExample = async () => {
 		const query  = `
 			query Challenge {
@@ -94,6 +95,13 @@ const NFTPage = () => {
 		mutation: gql(qLogin),
 	  })
 	  console.log('Lens example data: ', response,login)
+	  const qProfile=`query DefaultProfile {
+		defaultProfile(request: { ethereumAddress: "0x3A5bd1E37b099aE3386D13947b6a90d97675e5e3"}) {
+		  id}`
+		  const fetchProfile=await apolloClient.query({
+			query:gql(qProfile),
+		  })
+		  console.log('fetchProfile :>> ', fetchProfile);
 	  setAuthToken(login.data.authenticate.accessToken)
 	  setRefreshToken(login.data.authenticate.refreshToken)
 	}
