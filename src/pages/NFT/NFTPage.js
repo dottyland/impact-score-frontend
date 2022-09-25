@@ -34,23 +34,17 @@ const NFTPage = () => {
 	const [nftData,setNftData]=useState({});
 	const [lUrl,setlUrl]=useState({});
 	const [lData,setLData]=useState({});
-	console.log('lData :>> ', lData);
-	console.log('lUrl :>> ', lUrl);
 	const [id,setId]=useState("-1")
 	const contract=new ethers.Contract("0x7291EBbf2633b6816545Ae33BA5795da3b0E983B",Lock,provider);
 	const getTokenId=async()=>{
 		const res= await contract.tokenOfOwnerByIndex(address,ethers.BigNumber.from(0));
-		console.log('res :>> ', res);
 		const a = ethers.BigNumber.from(res);
-		console.log('a :>> ', a,a.toString());
-		console.log('res.tos :>> ', res.toString());
 		setId(res.toString())
 	}
 	const tokenUri=async()=>{
 		//		
 		const tokenId=ethers.BigNumber.from(id);
 		const data= await contract.tokenURI(tokenId);
-		console.log('data :>> ', data);
 		const buf=Buffer.from(data.substring(29),'base64')
 		
 		let temp=buf.toString('ascii');
@@ -69,18 +63,14 @@ const NFTPage = () => {
 		metadata.image=jso.image_data;
 		metadata.name=jso.name
 		metadata.imageMimeType="image/svg+xml"
-		console.log('metadata :>> ', metadata);
 		const strin=JSON.stringify(jso)
 		const lstrin=JSON.stringify(metadata);
 		const lcode= Buffer.from(lstrin).toString('base64');
 		const link=prefix+lcode;
 		const recode=Buffer.from(strin).toString('base64');
 		const url=prefix+recode;
-		console.log('url :>> ', url);
-		console.log('link :>> ', link);
 		const Data= await fetch(data);
 		const jData=await Data.json();
-		console.log('jData :>> ', jData);
 		setNftData(jData);
 		setLData(metadata);
 		setlUrl(link)
@@ -106,9 +96,7 @@ const NFTPage = () => {
 	const response = await apolloClient.query({
 		query: gql(query),
 	  })
-	  console.log('response :>> ', response);
 	  const signature = await signMessageAsync({message:response.data.challenge.text});
-	  console.log('signature :>> ', signature);
 	  const qLogin = `mutation Authenticate {
 		authenticate(request: {
 		  address: "${address}",
@@ -122,7 +110,6 @@ const NFTPage = () => {
 		mutation: gql(qLogin),
 	  })
 	 
-	  console.log('Lens example data: ', response,login)
 	  
 	  setAuthToken(login.data.authenticate.accessToken)
 	  setRefreshToken(login.data.authenticate.refreshToken)
@@ -290,7 +277,8 @@ const NFTPage = () => {
 				  } 
 				},
 		  })
-		  console.log('createP :>> ', mPost,createP);
+		  console.log('createP :>> ', createP);
+		  console.log('NFTData :>> ', createP.data.createPostTypedData.value.contentURI);
 	}
 	return (
 		
@@ -302,7 +290,7 @@ const NFTPage = () => {
 				<div className={style.ButtonsContainer}>
 					<CTAButtton
 						buttonIcon={shareIcon}
-						buttonText='Create Lens'
+						buttonText='Sign in With Lens'
 						click = {queryExample} />
 					<CTAButtton
 						buttonIcon={shareIcon}
