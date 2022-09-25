@@ -127,10 +127,10 @@ const NFTPage = () => {
 	  setRefreshToken(login.data.authenticate.refreshToken)
 	}
 	const p2=async()=>{
-		
+		const a = Date.now().toString();
 		const qCreateProfile=`mutation CreateProfile {
 			createProfile(request:{ 
-						  handle: "madmax11111111111122221",
+						  handle: "${"madImpact"+a}",
 						  profilePictureUri: null,
 						  followNFTURI: null,
 						  followModule: null
@@ -154,7 +154,7 @@ const NFTPage = () => {
 		  })
 		  console.log('object :>> ', createProfile);
 		  const qProfile=`query Profile {
-			profile(request: { handle: "madmax11111111111122221.test" }) {
+			profile(request: { handle: "${`madImpact`+a+`.test`}" }) {
 			  id
 			  name
 			  bio
