@@ -69,9 +69,15 @@ const NFTPage = () => {
 		const url=prefix+recode;
 		const Data= await fetch(data);
 		const jData=await Data.json();
-		const image=await fetch(jData.image_data)
-		console.log('image :>> ', image);
-		setImageData(image);
+		const feed=await fetch(jData.image_data).then(response => response.blob())
+		.then(imageBlob => {
+			// Then create a local URL for that image and print it 
+			const imageObjectURL = URL.createObjectURL(imageBlob);
+			console.log(imageObjectURL);
+			return imageObjectURL
+		});
+		console.log('image :>> ', feed);
+		setImageData(feed);
 		setNftData(jData);
 		setLData(metadata);
 		setlUrl(link)
