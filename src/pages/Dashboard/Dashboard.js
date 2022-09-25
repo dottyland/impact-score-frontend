@@ -61,7 +61,7 @@ const { data, isLoading, isSuccess, write } = useContractWrite({
 					<CTAButton
 						buttonIcon={getIcon}
 						buttonText='CLAIM IMPACT SELF NFT'
-						click={() => {write()}} />
+						click={write} />
 
 			</div>
 
