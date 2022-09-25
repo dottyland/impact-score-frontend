@@ -133,7 +133,7 @@ const NFTPage = () => {
 		  })
 		  console.log('object :>> ', createProfile);
 		  const qProfile=`query Profile {
-			profile(request: { handle: "madmax11111111111122221" }) {
+			profile(request: { handle: "madmax11111111111122221.test" }) {
 			  id
 			  name
 			  bio
