@@ -48,10 +48,7 @@ const NFTPage = () => {
 		const buf=Buffer.from(data.substring(29),'base64')
 		
 		let temp=buf.toString('ascii');
-		console.log('window.btoa() :>> ',temp );
 		const jso=JSON.parse(temp)
-		console.log('jso :>> ', jso);
-		console.log(',buf.toJSON() :>> ', buf.toJSON());
 		let metadata={};
 		const a=Date.now().toString();
 		metadata.version="one";
@@ -140,7 +137,6 @@ const NFTPage = () => {
 				  } 
 				},
 		  })
-		  console.log('object :>> ', createProfile);
 		  const qProfile=`query Profile {
 			profile(request: { handle: "madmax11111111111122221323.test" }) {
 			  id
@@ -227,7 +223,6 @@ const NFTPage = () => {
 			  const fetchProfile=await apolloClient.query({
 				query:gql(qProfile),
 			  })
-			  console.log('fetchProfile2 :>> ', fetchProfile);
 		const mPost=`mutation CreatePostTypedData {
 			createPostTypedData(request: {
 			  profileId: "${fetchProfile.data.profile.id}",
