@@ -29,24 +29,8 @@ const APIURL = 'https://api-mumbai.lens.dev/';
 
 const NFTPage = () => {
 	
-	
-	const httpLink=new HttpLink({uri:APIURL});
-	
 	const provider=useProvider();
 	const {authToken,setAuthToken,refreshToken,setRefreshToken}=useContext(UserContext);
-	const authMiddleware = new ApolloLink((operation, forward) => {
-			// add the authorization to the headers
-			operation.setContext({
-			headers: {
-				'x-access-token': authToken ? `${authToken}` : "",
-			},
-			});
-			return forward(operation);
-		});
-	const apolloClient= new ApolloClient({
-  	uri: authToken?concat(authMiddleware,httpLink):APIURL,
-  	cache: new InMemoryCache(),
-	});
 	console.log('apolloClient :>> ', apolloClient);
 	const { signMessageAsync } = useSignMessage();
 	const {address}=useAccount();
@@ -144,6 +128,14 @@ const NFTPage = () => {
 		  }`
 		const createProfile=await apolloClient.mutate({
 			mutation:gql(qCreateProfile),
+			options: { 
+				context: { 
+				  headers: { 
+					"x-access-token": authToken  // this header will reach the server
+				  } 
+				},
+				// ... other options  
+			  }
 		  })
 		  console.log('object :>> ', createProfile);
 		  const qProfile=`query DefaultProfile {
