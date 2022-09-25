@@ -49,6 +49,10 @@ const NFTPage = () => {
 		const jso=JSON.parse(temp)
 		console.log('jso :>> ', jso);
 		console.log(',buf.toJSON() :>> ', buf.toJSON());
+		const strin=JSON.stringify(jso)
+		const recode=Buffer.from(strin).toString('base64');
+		const url=prefix+recode;
+		console.log('url :>> ', url);
 		const Data= await fetch(data);
 		const jData=await Data.json();
 		console.log('jData :>> ', jData);
@@ -61,7 +65,7 @@ const NFTPage = () => {
 		if(id!=="-1")
 		tokenUri();
 	},[id])
-
+	const prefix=`data:application/json;base64,`
 	const queryExample = async () => {
 		const query  = `
 			query Challenge {
@@ -70,7 +74,7 @@ const NFTPage = () => {
 				}
 			  }
 	`
-	const prefix=`data:application/json;base64,`
+	
 	const response = await apolloClient.query({
 		query: gql(query),
 	  })
