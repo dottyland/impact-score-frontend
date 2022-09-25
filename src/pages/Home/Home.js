@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import style from './Home.module.css';
 import ExplanationBox from '../../containers/ExplanationBox/ExplanationBox'
+// import Manifesto from '../../components/Manifesto/Manifesto';
 import CTAButton from '../../components/CTAButton/CTAButton';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
@@ -11,8 +12,6 @@ import ethereumIcon from '../../assets/ethereum.png'
 import HomeContent from '../../data/HomeContent'
 
 const origin = window.location.origin;
-// const provider = new ethers.providers.Web3Provider(window.ethereum);
-// const signer = provider.getSigner();	
 const { ethereum } = window;
 
 const Home = () => {
@@ -69,7 +68,8 @@ const Home = () => {
 				ExplanationContent = {HomeContent.explanationData}
 			/>
 
-			<ConnectButton />
+			<ConnectButton/>
+			{/* <Manifesto/> */}
 			{/* <button onClick={goToAuth}>test</button> */}
 		</div>
 	)

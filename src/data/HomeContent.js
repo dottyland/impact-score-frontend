@@ -1,5 +1,5 @@
 const HomeContent = {
-	pageTitle: 'For 7.7bln consumers to halt climate crisis, impact must become part of identity.',
+	pageTitle: 'For 7+ billion consumers to decelerate the climate crisis, impact must become part of identity.',
 	explanationData: [
 		{
 			NumberText: 'Step 1',

@@ -8,6 +8,7 @@ import NFTs from './pages/NFT/NFTs';
 import Privacy from './pages/Privacy/Privacy';
 import { UserContext } from './contexts/UserContext';
 import { WagmiConfig, createClient } from 'wagmi';
+import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit';
 import { getDefaultProvider } from 'ethers';
 import {
 	BrowserRouter as Router,
