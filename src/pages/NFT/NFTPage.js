@@ -70,6 +70,7 @@ const NFTPage = () => {
 		const Data= await fetch(data);
 		const jData=await Data.json();
 		const image=await fetch(jData.image_data)
+		console.log('image :>> ', image);
 		setImageData(image);
 		setNftData(jData);
 		setLData(metadata);
